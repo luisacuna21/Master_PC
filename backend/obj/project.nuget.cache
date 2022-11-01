@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "iLmSDg7hx3+Yj4fPQ2gW2f9uMFBifvO8cqsnBRJ3zsx7YL9/rwKhapeK4Es8+UC3A3hTUd4KwJyoepsGaCGMdQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\JADPA-30\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

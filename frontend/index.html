@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PC Shop - Tienda online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preload" href="css/styles.css" as="style" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mainNavbar">
+      <!-- PC Shop logo -->
+      <div class="shopLogoDiv">
+        <a class="navbar-brand" href="index.html">
+          <img class="img-fluid shopLogo" src="images/PCShopLogo.png" alt="Logo de Master PC" />
+        </a>
+      </div>
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- Home -->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+            </li>
+            <!-- Categories -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+              <ul class="dropdown-menu subitems" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Escritorio</a></li>
+                <li><a class="dropdown-item" href="#">Laptops</a></li>
+                <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                <li><a class="dropdown-item" href="#">Repuestos</a></li>
+                <li><a class="dropdown-item" href="#">Redes</a></li>
+                <li><a class="dropdown-item" href="#">Algunas más...</a></li>
+                <li><a class="dropdown-item" href="#"></a></li>
+              </ul>
+            </li>
+            <!-- Catalogue -->
+            <li class="nav-item">
+              <a class="nav-link active" href="#" aria-current="page">Catálogo</a>
+            </li>
+            <!-- News -->
+            <li class="nav-item">
+              <a class="nav-link active" href="#" aria-current="page">Noticias</a>
+            </li>
+            <!-- About us -->
+            <li class="nav-item">
+              <a class="nav-link active" href="#" aria-current="page">Sobre nosotros</a>
+            </li>
+            <!-- Contact us -->
+            <li class="nav-item">
+              <a class="nav-link active" href="contactus.html" aria-current="page">Contáctenos</a>
+            </li>
+          </ul>
+          <!-- Search form -->
+          <form class="d-flex">
+            <input class="form-control me-2 searchInput" type="search" placeholder="Buscar" aria-label="Search" required/>
+            <button class="btn btn-outline-dark btnSearch" type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-search"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#ffffff"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <circle cx="10" cy="10" r="7" />
+                <line x1="21" y1="21" x2="15" y2="15" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Login and cart buttons -->
+      <div class="login-cart-div">
+        <button type="button" id="btnLogin" class="btn btnLogin" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-backdrop="true">Iniciar sesión</button>
+        <button class="btn btnCart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1)">
+            <path
+              d="M21.822,7.431C21.635,7.161,21.328,7,21,7H7.333L6.179,4.23C5.867,3.482,5.143,3,4.333,3H2v2h2.333l4.744,11.385 C9.232,16.757,9.596,17,10,17h8c0.417,0,0.79-0.259,0.937-0.648l3-8C22.052,8.044,22.009,7.7,21.822,7.431z M17.307,15h-6.64 l-2.5-6h11.39L17.307,15z"
+            ></path>
+            <circle cx="10.5" cy="19.5" r="1.5"></circle>
+            <circle cx="17.5" cy="19.5" r="1.5"></circle>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Login form -->
+    <div class="modal fade loginForm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Inicio de sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre de usuario:</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña:</label>
+                <input type="password" class="form-control" id="userPassword" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form>
+            <div>
+              <hr>
+              <!-- <hr class="loginSeparator">
+              <hr class="loginSeparator"> -->
+            </div>
+            <div class="notRegisteredDiv">
+              <h6>Aún no tiene una cuenta? </h6>
+              <button type="button" id="btnLogin" class="btn btnNoResgistered" data-bs-toggle="modal" data-bs-target=".signInForm" data-bs-backdrop="true">Iniciar sesión</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div id="emailHelp" class="form-text">No compartiremos tus datos con nadie.</div>
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sing in form -->
+    <div class="modal fade signInForm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Registrarse</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña:</label>
+                <input type="password" class="form-control" id="userPassword" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div id="emailHelp" class="form-text">No compartiremos tus datos con nadie.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider -->
+    <div id="carouselExampleControls" class="carousel slide slider" data-bs-ride="carousel">
+      <div class="carousel-inner sliderDiv">
+        <div class="carousel-item active">
+          <img src="images/slider/Img01.jpg" class="d-block w-100 sliderImage" alt="..." />
+        </div>
+        <div class="carousel-item sliderDiv">
+          <img src="images/slider/Img02.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item sliderDiv">
+          <img src="images/slider/Img03.jpg" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <main>
+      <h4 class="mostSelledProductsHeader">Productos más vendidos</h4>
+        <div class="productsDiv">
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/MSI GP75 Loepard.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/MSI 2021.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>        
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/Alienware M15 R2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/Asus L410.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/Hp spectre 360.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card productCard">
+            <img src="images/mostSelledProducts/matebook-x-huawei.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+    </main>
+
+    <footer class="text-center text-lg-start bg-dark text-muted">
+      <!-- Social media section -->
+      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <!-- Social media header -->
+        <div class="me-5 d-none d-lg-block">
+          <h4>Conéctate con nostros a través de nuestras redes sociales:</span>
+        </div>
+
+        <!-- Socials media -->
+        <div>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/" class="me-4 text-reset">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-facebook"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/" class="me-4 text-reset">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-instagram"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <rect x="4" y="4" width="16" height="16" rx="4" />
+              <circle cx="12" cy="12" r="3" />
+              <line x1="16.5" y1="7.5" x2="16.5" y2="7.501" />
+            </svg>
+          </a>
+
+          <!-- Twitter -->
+          <a href="https://twitter.com/" class="me-4 text-reset">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://es.linkedin.com/" class="me-4 text-reset">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <line x1="8" y1="11" x2="8" y2="16" />
+              <line x1="8" y1="8" x2="8" y2="8.01" />
+              <line x1="12" y1="16" x2="12" y2="11" />
+              <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+            </svg>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://web.whatsapp.com/" class="me-4 text-reset">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-whatsapp" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+              <path d="M9 10a0.5 .5 0 0 0 1 0v-1a0.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 .5 0 0 0 0 -1h-1a0.5 .5 0 0 0 0 1" />
+            </svg>
+          </a>
+
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+
+      <!-- Links  -->
+      <section>
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold mb-4 pcShopBrandName"><i class="fas fa-gem me-3"></i>PC Shop</h6>
+              <p>
+                Venta de equipo de cómputo para cualquier necesidad de uso. Desde computadoras para trabajo liviano de oficina, 
+                hasta máquinas potentes para trabajos exigentes. 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa asperiores natus unde quisquam.
+              </p>
+            </div>
+
+            <!-- Brands -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 brands">
+              <h6 class="text-uppercase fw-bold mb-4">Marcas</h6>
+              <!-- Asus -->
+              <p>
+                <a href="https://www.asus.com/latin/" class="text-reset">Asus</a>
+              </p>
+              <!-- Hp -->
+              <p>
+                <a href="https://www.hp.com/lamerica_nsc_cnt_amer-es/home.html" class="text-reset">Hp</a>
+              </p>
+              <!-- Lenovo -->
+              <p>
+                <a href="https://www.lenovo.com/ec/es?Redirect=False" class="text-reset">Lenovo</a>
+              </p>
+              <!-- MSI -->
+              <p>
+                <a href="https://latam.msi.com/" class="text-reset">MSI</a>
+              </p>
+              <!-- Dell -->
+              <p>
+                <a href="https://www1.la.dell.com/" class="text-reset">Dell</a>
+              </p>
+            </div>
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Contáctanos</h6>
+              <p><i class="fas fa-home me-3"></i>De los semáforos de Villa Progreso 1c. al sur. </p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                pcshop@gmail.com
+              </p>
+              <p><i class="fas fa-phone me-3"></i> +505 2245 6788</p>
+              <p><i class="fas fa-print me-3"></i> +505 2254 8967</p>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
+              <div class="container-fluid mapDiv">
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15602.77644066415!2d-86.22411168227201!3d12.133069477941055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sni!4v1625210648614!5m2!1ses!2sni"  allowfullscreen="" loading="lazy"></iframe>
+                <!-- style="border:0; width: 20rem; height: 15rem;" -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="text-center bg-dark p-4">© 2021 Copyright PC Shop</div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

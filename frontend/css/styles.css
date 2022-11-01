@@ -1,0 +1,192 @@
+body {
+  font-size: 16px;
+  font-family: "Krub", sans-serif;
+}
+a {
+  text-align: left;
+}
+@media (min-width: 991) {
+  a {
+    text-align: center;
+  }
+}
+@media (min-width: 1024px) {
+  a {
+    text-align: center;
+  }
+}
+.mainNavbar {
+  margin-top: -0.5rem;
+}
+
+.shopLogoDiv {
+  display: flex;
+  justify-content: center;
+}
+.shopLogo {
+  width: 7rem;
+}
+
+.searchInput {
+  width: auto;
+  border-radius: 0.4rem 0rem 0rem 0.4rem;
+  margin-right: 0rem !important;
+}
+@media (min-width: 768px) {
+  .searchInput {
+    width: 15rem;
+  }
+}
+.btnSearch {
+  border-radius: 0rem 0.4rem 0.4rem 0rem;
+  background-color: #1f86e0;
+  color: #fff;
+  border: none;
+}
+
+.login-cart-div {
+  display: flex;
+  margin-bottom: 0.7rem;
+}
+.btnLogin {
+  margin-top: 0.6rem;
+  width: 6.7rem;
+  height: 2.4rem;
+  margin-right: 0.3rem;
+  padding: 0rem;
+  background-color: #1f86e0;
+  color: #fff;
+}
+.btnCart {
+  margin-top: 0.6rem;
+  background-color: #1f86e0;
+  padding: 0.1rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.slider {
+  height: 7rem;
+}
+.sliderDiv {
+  height: 8rem;
+}
+@media (min-width: 321px) {
+  .slider {
+    height: 8rem;
+  }
+  .sliderDiv {
+    height: 10rem;
+  }
+}
+@media (min-width: 540px) {
+  .slider {
+    height: 8rem;
+  }
+  .sliderDiv {
+    height: 9rem;
+  }
+}
+@media (min-width: 768px) {
+  .slider {
+    height: 16rem;
+  }
+  .sliderDiv {
+    height: 20rem;
+  }
+}
+@media (min-width: 1024px) {
+  .slider {
+    height: 20rem;
+  }
+  .sliderDiv {
+    height: 20rem;
+  }
+}
+
+footer.p.a {
+  text-align: center;
+}
+.pcShopBrandName {
+  font-family: Segoe Print;
+  text-transform: initial !important;
+  font-size: 2.8rem;
+}
+.map {
+  width: 15rem;
+  height: 10rem;
+}
+@media (width: 280px) {
+  .map {
+    width: 13rem;
+    height: 15rem;
+  }
+}
+@media (min-width: 361px) {
+  .map {
+    width: 20rem;
+    height: 15rem;
+  }
+}
+@media (width: 768px) {
+  .map {
+    width: 12rem;
+    height: 10rem;
+  }
+}
+
+.mostSelledProductsHeader {
+  margin-left: 5rem;
+  margin-top: 1.5rem;
+  /* margin-bottom: 2rem; */
+}
+@media (max-width: 320px) {
+  .mostSelledProductsHeader {
+    margin-left: 0rem;
+    text-align: center;
+  }
+}
+.mostSelledProducts {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+}
+.productsDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.productCard {
+  margin: 1.5rem 1rem;
+  width: 17rem;
+}
+
+.loginSeparatorDiv {
+  display: flex;
+  justify-content: space-around;
+}
+.loginSeparator {
+  margin-bottom: 1rem;
+  width: 40%;
+}
+
+.notRegisteredDiv {
+  display: flex;
+}
+.btnNoResgistered {
+  margin-top: -0.6rem;
+  background-color: transparent;
+  text-decoration: underline;
+  color: blue;
+}
+
+.sendContactRequestDiv {
+  display: flex;
+  justify-content: center;
+}
+.sendContactRequest {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  width: 10rem;
+}
