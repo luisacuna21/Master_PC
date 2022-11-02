@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\backend.csproj": {}
+    "C:\\Users\\acuap\\Desktop\\Mi carpeta\\Universidad\\X Semestre\\Diseño de sistemas en internet\\Proyecto\\master_pc\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\backend.csproj": {
+    "C:\\Users\\acuap\\Desktop\\Mi carpeta\\Universidad\\X Semestre\\Diseño de sistemas en internet\\Proyecto\\master_pc\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\acuap\\Desktop\\Mi carpeta\\Universidad\\X Semestre\\Diseño de sistemas en internet\\Proyecto\\master_pc\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\JADPA-30\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JADPA-30\\Downloads\\MasterPCBootstrap\\backend\\obj\\",
+        "projectPath": "C:\\Users\\acuap\\Desktop\\Mi carpeta\\Universidad\\X Semestre\\Diseño de sistemas en internet\\Proyecto\\master_pc\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\acuap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\acuap\\Desktop\\Mi carpeta\\Universidad\\X Semestre\\Diseño de sistemas en internet\\Proyecto\\master_pc\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JADPA-30\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\acuap\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,24 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -51,7 +69,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -63,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
