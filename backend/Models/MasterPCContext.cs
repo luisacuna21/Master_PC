@@ -27,17 +27,10 @@ namespace backend.Models
         public virtual DbSet<ShippingAdress> ShippingAdresses { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
-//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//         {
-//             if (!optionsBuilder.IsConfigured)
-//             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                 optionsBuilder.UseSqlServer("Server=localhost;Database=MasterPC;Trusted_Connection=true");
-//             }
-//         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // modelBuilder.Entity<InsertUserResult>().ToSqlQuery("EXECUTE dbo.InsertUser @Username, @Password, @UserId OUTPUT");
+
             modelBuilder.Entity<Brand>(entity =>
             {
                 entity.ToTable("Brands", "Inventory");
@@ -74,6 +67,13 @@ namespace backend.Models
                 entity.Property(e => e.PostalCode)
                     .HasMaxLength(10)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                // entity.HasOne(d => d.User)
+                //     .WithMany(p => p.Customers)
+                //     .HasForeignKey(d => d.UserId)
+                //     .HasConstraintName("FK__Customers__UserI__48CFD27E");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -90,6 +90,10 @@ namespace backend.Models
 
                 entity.Property(e => e.City)
                     .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName)
@@ -112,10 +116,10 @@ namespace backend.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                // entity.HasOne(d => d.User);
-                    // .WithOne(p => p.Employees)
-                    // .HasForeignKey(d => d.UserId)
-                    // .HasConstraintName("FK__Employees__UserI__276EDEB3");
+                // entity.HasOne(d => d.User)
+                //     .WithMany(p => p.Employees)
+                //     .HasForeignKey(d => d.UserId)
+                //     .HasConstraintName("FK__Employees__UserI__276EDEB3");
             });
 
             modelBuilder.Entity<Order>(entity =>

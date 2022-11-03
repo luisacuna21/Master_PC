@@ -22,7 +22,7 @@ namespace backend.Models
         public string Shippingcountry { get; set; } = null!;
 
         public virtual Customer Customer { get; set; } = null!;
-        public virtual Shipper? Shipper { get; set; }
+        public virtual Shipper Shipper { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -17,7 +17,9 @@ namespace backend.Models
         public string City { get; set; } = null!;
         public string PostalCode { get; set; } = null!;
         public string Country { get; set; } = null!;
+        public int? UserId { get; set; }
 
+        public virtual User User { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<ShippingAdress> ShippingAdresses { get; set; }
     }
