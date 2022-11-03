@@ -68,7 +68,7 @@ namespace backend.Controllers
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _userRepository.GetById(id);
-            if (user == null)
+            if (user is null)
                 return NotFound();
             return user;
         }
