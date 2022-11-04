@@ -24,7 +24,7 @@ namespace backend.Models
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<ProductCategory> ProductCategories { get; set; } = null!;
         public virtual DbSet<Shipper> Shippers { get; set; } = null!;
-        public virtual DbSet<ShippingAdress> ShippingAdresses { get; set; } = null!;
+        public virtual DbSet<ShippingAddress> ShippingAdresses { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -170,12 +170,12 @@ namespace backend.Models
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasKey(e => e.OrderDetail1)
+                entity.HasKey(e => e.OrderDetailId)
                     .HasName("PK__OrderDet__2529D899A21C8EEE");
 
                 entity.ToTable("OrderDetails", "Sale");
 
-                entity.Property(e => e.OrderDetail1).HasColumnName("Order_Detail");
+                entity.Property(e => e.OrderDetailId).HasColumnName("Order_Detail");
 
                 entity.Property(e => e.Discount).HasColumnType("decimal(3, 2)");
 
@@ -263,7 +263,7 @@ namespace backend.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<ShippingAdress>(entity =>
+            modelBuilder.Entity<ShippingAddress>(entity =>
             {
                 entity.HasKey(e => e.ShippingAddressId)
                     .HasName("PK__Shipping__EC10DC59980743F1");

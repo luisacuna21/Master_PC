@@ -64,7 +64,7 @@ CREATE TABLE Customer.Customers (
 GO
 --ALTER TABLE	Customer.Customers ADD UserID int FOREIGN KEY REFERENCES Logins.Users (UserID)
 
-CREATE TABLE Customer.ShippingAdresses(
+CREATE TABLE Customer.ShippingAddresses(
 	ShippingAddressID int PRIMARY KEY IDENTITY (1,1),
 	CustomerID int FOREIGN KEY REFERENCES Customer.Customers (CustomerID) NOT NULL,
 	ShippinAddress varchar(100) NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE Sale.Orders (
 GO
 
 CREATE TABLE Sale.OrderDetails (
-	Order_Detail int PRIMARY KEY IDENTITY (1,1),
+	Order_DetailID int PRIMARY KEY IDENTITY (1,1),
 	OrderID int FOREIGN KEY REFERENCES Sale.Orders (OrderID) NOT NULL ,
 	ProductID int FOREIGN KEY REFERENCES Inventory.Products (ProductID) NOT NULL ,
 	UnitPrice decimal(8,2) NOT NULL DEFAULT (0),

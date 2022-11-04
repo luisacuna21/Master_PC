@@ -8,7 +8,7 @@ namespace backend.Models
         public Customer()
         {
             Orders = new HashSet<Order>();
-            ShippingAdresses = new HashSet<ShippingAdress>();
+            ShippingAdresses = new HashSet<ShippingAddress>();
         }
 
         public int CustomerId { get; set; }
@@ -21,6 +21,6 @@ namespace backend.Models
 
         public virtual User User { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<ShippingAdress> ShippingAdresses { get; set; }
+        public virtual ICollection<ShippingAddress> ShippingAdresses { get; set; }
     }
 }

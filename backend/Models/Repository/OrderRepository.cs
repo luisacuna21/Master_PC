@@ -2,23 +2,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models.Repository;
 
-public class CustomerRepository : ICustomerRepository
+class OrderRepository : IOrderRepository
 {
     private readonly MasterPCContext _context;
 
-    public CustomerRepository(MasterPCContext context)
+    public OrderRepository(MasterPCContext context)
     {
         _context = context;
     }
 
-    public async Task<Customer> Add(Customer entity)
+    public async Task<Order> Add(Order entity)
     {
-        _context.Customers.Add(entity);
+        _context.Orders.Add(entity);
         await _context.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<bool> Update(Customer entity)
+    public async Task<bool> Update(Order entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
 
@@ -28,7 +28,7 @@ public class CustomerRepository : ICustomerRepository
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!(await Exists(entity.CustomerId)))
+            if (!(await Exists(entity.OrderId)))
                 return false;
             else
                 throw;
@@ -38,28 +38,28 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<bool> Delete(int id)
     {
-        var customer = await _context.Customers.FindAsync(id);
-        if (customer is null)
+        var order = await _context.Orders.FindAsync(id);
+        if (order is null)
             return false;
 
-        _context.Customers.Remove(customer);
+        _context.Orders.Remove(order);
 
         await _context.SaveChangesAsync();
         return true;
     }
 
-    public async Task<IEnumerable<Customer>> GetAll()
+    public async Task<IEnumerable<Order>> GetAll()
     {
-        return await _context.Customers.ToListAsync();
+        return await _context.Orders.ToListAsync();
     }
 
-    public async Task<Customer> GetById(int id)
+    public async Task<Order> GetById(int id)
     {
-        return await _context.Customers.FindAsync(id);
+        return await _context.Orders.FindAsync(id);
     }
 
     public async Task<bool> Exists(int id)
     {
-        return await (_context.Customers.AnyAsync(e => e.CustomerId == id));
+        return await _context.Orders.AnyAsync(e => e.OrderId == id);
     }
 }

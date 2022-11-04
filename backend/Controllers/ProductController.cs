@@ -14,7 +14,7 @@ namespace backend.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-       private readonly IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductController(IProductRepository productRepository)
         {

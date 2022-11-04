@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace backend.Models
 {
-    public partial class ShippingAdress
+    public partial class ShippingAddress
     {
         public int ShippingAddressId { get; set; }
         public int CustomerId { get; set; }

@@ -5,7 +5,7 @@ namespace backend.Models
 {
     public partial class OrderDetail
     {
-        public int OrderDetail1 { get; set; }
+        public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public decimal UnitPrice { get; set; }
