@@ -22,7 +22,7 @@ GO
 
 --OPEN SYMMETRIC KEY UserPasswordsEncryption  
 --DECRYPTION BY CERTIFICATE UsersManagement;
---UPDATE Logins.Users SET Username ='admin', Password = ENCRYPTBYKEY(Key_GUID('UserPasswordsEncryption'), '132461');
+--UPDATE Logins.Users SET Username ='admin', Password = ENCRYPTBYKEY(Key_GUID('UserPasswordsEncryption'), '1234') WHERE Username = 'admin';
 --CLOSE SYMMETRIC KEY UserPasswordsEncryption;
 --GO
 

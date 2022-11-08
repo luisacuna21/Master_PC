@@ -11,7 +11,7 @@ namespace backend.Models
         }
 
         public int BrandId { get; set; }
-        public string BrandName { get; set; } = null!;
+        public string BrandName { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

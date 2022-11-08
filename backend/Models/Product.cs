@@ -11,7 +11,7 @@ namespace backend.Models
         }
 
         public int ProductId { get; set; }
-        public string ProductName { get; set; } = null!;
+        public string ProductName { get; set; }
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
         public decimal? UnitPrice { get; set; }
@@ -19,9 +19,10 @@ namespace backend.Models
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+        public byte[] Photo { get; set; }
 
-        public virtual Brand Brand { get; set; } = null!;
-        public virtual ProductCategory Category { get; set; } = null!;
+        public virtual Brand Brand { get; set; }
+        public virtual ProductCategory Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

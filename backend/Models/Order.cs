@@ -16,12 +16,12 @@ namespace backend.Models
         public DateTime? RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public int? ShipperId { get; set; }
-        public string ShippingAddress { get; set; } = null!;
-        public string ShippingCity { get; set; } = null!;
-        public string ShippingPostalCode { get; set; } = null!;
-        public string Shippingcountry { get; set; } = null!;
+        public string ShippingAddress { get; set; }
+        public string ShippingCity { get; set; }
+        public string ShippingPostalCode { get; set; }
+        public string Shippingcountry { get; set; }
 
-        public virtual Customer Customer { get; set; } = null!;
+        public virtual Customer Customer { get; set; }
         public virtual Shipper Shipper { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

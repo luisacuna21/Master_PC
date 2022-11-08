@@ -137,7 +137,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if(user is null)
+            if (user is null)
                 return BadRequest();
             return await _userRepository.Add(user);
         }
@@ -161,11 +161,18 @@ namespace backend.Controllers
 
         //     return NoContent();
         // }
-                // DELETE: api/User/5
+        // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteUser(int id)
         {
             return await _userRepository.Delete(id);
+        }
+
+        [HttpPost]
+        [Route("verify")]
+        public async Task<ActionResult<User>> VerifyUser(User user)
+        {
+            return await _userRepository.VerifyUser(user.Username, user.PasswordString);
         }
     }
 }

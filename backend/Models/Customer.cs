@@ -8,19 +8,20 @@ namespace backend.Models
         public Customer()
         {
             Orders = new HashSet<Order>();
-            ShippingAdresses = new HashSet<ShippingAddress>();
+            ShippingAddresses = new HashSet<ShippingAddress>();
         }
 
         public int CustomerId { get; set; }
-        public string FullName { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string City { get; set; } = null!;
-        public string PostalCode { get; set; } = null!;
-        public string Country { get; set; } = null!;
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
         public int? UserId { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<ShippingAddress> ShippingAdresses { get; set; }
+        public virtual ICollection<ShippingAddress> ShippingAddresses { get; set; }
     }
 }

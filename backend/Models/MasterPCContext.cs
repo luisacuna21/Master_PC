@@ -16,21 +16,28 @@ namespace backend.Models
         {
         }
 
-        public virtual DbSet<Brand> Brands { get; set; } = null!;
-        public virtual DbSet<Customer> Customers { get; set; } = null!;
-        public virtual DbSet<Employee> Employees { get; set; } = null!;
-        public virtual DbSet<Order> Orders { get; set; } = null!;
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
-        public virtual DbSet<Product> Products { get; set; } = null!;
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; } = null!;
-        public virtual DbSet<Shipper> Shippers { get; set; } = null!;
-        public virtual DbSet<ShippingAddress> ShippingAdresses { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
+//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//         {
+//             if (!optionsBuilder.IsConfigured)
+//             {
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                 optionsBuilder.UseSqlServer("Server=localhost;Database=MasterPC;Trusted_Connection=true");
+//             }
+//         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<InsertUserResult>().ToSqlQuery("EXECUTE dbo.InsertUser @Username, @Password, @UserId OUTPUT");
-
             modelBuilder.Entity<Brand>(entity =>
             {
                 entity.ToTable("Brands", "Inventory");
@@ -38,6 +45,7 @@ namespace backend.Models
                 entity.Property(e => e.BrandId).HasColumnName("BrandID");
 
                 entity.Property(e => e.BrandName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -46,39 +54,55 @@ namespace backend.Models
             {
                 entity.ToTable("Customers", "Customer");
 
+                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CCAD90E05A99")
+                    .IsUnique();
+
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.City)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Country)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FullName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .HasMaxLength(24)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.PostalCode)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                // entity.HasOne(d => d.User)
-                //     .WithMany(p => p.Customers)
-                //     .HasForeignKey(d => d.UserId)
-                //     .HasConstraintName("FK__Customers__UserI__48CFD27E");
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.Customer)
+                    .HasForeignKey<Customer>(d => d.UserId)
+                    .HasConstraintName("FK__Customers__UserI__2C3393D0");
             });
 
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employees", "HumanResources");
+
+                entity.HasIndex(e => e.UserId, "UQ__Employee__1788CCADC47071E9")
+                    .IsUnique();
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
@@ -93,20 +117,24 @@ namespace backend.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.HireDate).HasColumnType("datetime");
 
                 entity.Property(e => e.IdentificationNumber)
+                    .IsRequired()
                     .HasMaxLength(16)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastName)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
@@ -116,10 +144,10 @@ namespace backend.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                // entity.HasOne(d => d.User)
-                //     .WithMany(p => p.Employees)
-                //     .HasForeignKey(d => d.UserId)
-                //     .HasConstraintName("FK__Employees__UserI__276EDEB3");
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.Employee)
+                    .HasForeignKey<Employee>(d => d.UserId)
+                    .HasConstraintName("FK__Employees__UserI__286302EC");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -141,18 +169,22 @@ namespace backend.Models
                 entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
 
                 entity.Property(e => e.ShippingAddress)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ShippingCity)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ShippingPostalCode)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Shippingcountry)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -160,22 +192,19 @@ namespace backend.Models
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Orders__Customer__3D5E1FD2");
+                    .HasConstraintName("FK__Orders__Customer__403A8C7D");
 
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("FK__Orders__ShipperI__3F466844");
+                    .HasConstraintName("FK__Orders__ShipperI__4222D4EF");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasKey(e => e.OrderDetailId)
-                    .HasName("PK__OrderDet__2529D899A21C8EEE");
-
                 entity.ToTable("OrderDetails", "Sale");
 
-                entity.Property(e => e.OrderDetailId).HasColumnName("Order_Detail");
+                entity.Property(e => e.OrderDetailId).HasColumnName("Order_DetailID");
 
                 entity.Property(e => e.Discount).HasColumnType("decimal(3, 2)");
 
@@ -191,13 +220,13 @@ namespace backend.Models
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Order__4222D4EF");
+                    .HasConstraintName("FK__OrderDeta__Order__44FF419A");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Produ__4316F928");
+                    .HasConstraintName("FK__OrderDeta__Produ__45F365D3");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -211,6 +240,7 @@ namespace backend.Models
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
                 entity.Property(e => e.ProductName)
+                    .IsRequired()
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
@@ -228,13 +258,13 @@ namespace backend.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.BrandId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__BrandI__34C8D9D1");
+                    .HasConstraintName("FK__Products__BrandI__37A5467C");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__Catego__35BCFE0A");
+                    .HasConstraintName("FK__Products__Catego__38996AB5");
             });
 
             modelBuilder.Entity<ProductCategory>(entity =>
@@ -244,6 +274,7 @@ namespace backend.Models
                 entity.Property(e => e.ProductCategoryId).HasColumnName("ProductCategoryID");
 
                 entity.Property(e => e.CategoryName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -255,66 +286,72 @@ namespace backend.Models
                 entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
 
                 entity.Property(e => e.CompanyName)
+                    .IsRequired()
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Phone)
+                    .IsRequired()
                     .HasMaxLength(24)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<ShippingAddress>(entity =>
             {
-                entity.HasKey(e => e.ShippingAddressId)
-                    .HasName("PK__Shipping__EC10DC59980743F1");
-
-                entity.ToTable("ShippingAdresses", "Customer");
+                entity.ToTable("ShippingAddresses", "Customer");
 
                 entity.Property(e => e.ShippingAddressId).HasColumnName("ShippingAddressID");
 
                 entity.Property(e => e.AddressName)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.City)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Country)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.Phone)
+                    .IsRequired()
                     .HasMaxLength(24)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PostalCode)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ShippinAddress)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.ShippingAdresses)
+                    .WithMany(p => p.ShippingAddresses)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ShippingA__Custo__2C3393D0");
+                    .HasConstraintName("FK__ShippingA__Custo__2F10007B");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users", "Logins");
 
-                entity.HasIndex(e => e.Username, "UQ__Users__536C85E4F5CB3439")
+                entity.HasIndex(e => e.Username, "UQ__Users__536C85E475853889")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.Username)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
             });

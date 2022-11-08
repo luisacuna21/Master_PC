@@ -38,11 +38,12 @@ CREATE TABLE HumanResources.Employees (
 	Address varchar (60) NULL ,
 	City varchar (30) NULL ,
 	Phone varchar (24) NULL ,
-	UserID int FOREIGN KEY REFERENCES Logins.Users (UserID)
+	Email varchar(50) NOT NULL,
+	UserID int UNIQUE FOREIGN KEY REFERENCES Logins.Users (UserID)
 )
 GO
-ALTER TABLE	HumanResources.Employees ADD Email varchar(50) NOT NULL;
-GO
+--ALTER TABLE	HumanResources.Employees ADD Email varchar(50) NOT NULL;
+--GO
 
 CREATE SCHEMA Customer;
 GO
@@ -54,7 +55,8 @@ CREATE TABLE Customer.Customers (
 	City varchar(50) NOT NULL,
 	PostalCode varchar(10) NOT NULL,
 	Country varchar(50) NOT NULL,
-	UserID int FOREIGN KEY REFERENCES Logins.Users (UserID)
+	Phone varchar(24) NOT NULL,
+	UserID int UNIQUE FOREIGN KEY REFERENCES Logins.Users (UserID)
 	--ShippingAddress varchar (100) NULL ,
 	--City varchar (30) NULL ,
 	--PostalCode varchar (10) NULL ,
@@ -114,6 +116,7 @@ CREATE TABLE Inventory.Products (
 	UnitsOnOrder smallint NULL CONSTRAINT DF_Products_UnitsOnOrder DEFAULT (0),
 	ReorderLevel smallint NULL CONSTRAINT DF_Products_ReorderLevel DEFAULT (0),
 	Discontinued bit NOT NULL CONSTRAINT DF_Products_Discontinued DEFAULT (0),
+	Photo varbinary(max) NULL
 )
 GO
 
@@ -146,16 +149,33 @@ CREATE TABLE Sale.OrderDetails (
 )
 GO
 
+-- Encryption
+
+USE MasterPC
+GO
+
+CREATE MASTER KEY ENCRYPTION BY   
+PASSWORD = 'masterpc2022';
+
+CREATE CERTIFICATE UsersManagement
+   WITH SUBJECT = 'Users passwords';
+GO
+
+CREATE SYMMETRIC KEY UserPasswordsEncryption
+    WITH ALGORITHM = AES_256  
+    ENCRYPTION BY CERTIFICATE UsersManagement;  
+GO
+
 -- Stored procedures
 
-ALTER PROC spI_User
+CREATE PROC spI_User
 @Username varchar(20),
 @Password varchar(100),
 @UserID int OUTPUT
 AS
 	BEGIN TRAN
 	BEGIN TRY
-		OPEN SYMMETRIC KEY UserPasswordsEncryption  
+		OPEN SYMMETRIC KEY UserPasswordsEncryption
 		DECRYPTION BY CERTIFICATE UsersManagement;
 
 		INSERT INTO Logins.Users (Username, Password)
@@ -172,11 +192,14 @@ AS
 	END CATCH
 GO
 
+EXEC spI_User 'admin', '1234', 0
+go
+
 ALTER PROC spU_User
 @UserID int,
 @Username varchar(20),
 @Password varchar(100),
-@Updated int OUTPUT
+@Updated bit = 0 OUTPUT
 AS
 	BEGIN TRAN
 	BEGIN TRY
@@ -189,12 +212,68 @@ AS
 
 		CLOSE SYMMETRIC KEY UserPasswordsEncryption;
 
-		SELECT @UserID = 1; -- Updated
+		SET @Updated = 1; -- Updated
 
 		COMMIT TRAN;
 	END TRY
 	BEGIN CATCH
-		SELECT @UserID = 0; -- Error
+		SET @Updated = 0; -- Error
 		ROLLBACK TRAN;
 	END CATCH
 GO
+
+ALTER PROC spVerify_User
+@UserID int = 0 OUTPUT,
+@Username varchar(20),
+@Password varchar(100),
+@UsernameRight bit = 0 OUTPUT,
+@Verified bit = 0 OUTPUT
+AS
+	IF EXISTS (SELECT * FROM Logins.Users WHERE Username = @Username)
+	BEGIN
+		SET @UsernameRight = 1;
+
+		OPEN SYMMETRIC KEY UserPasswordsEncryption  
+		DECRYPTION BY CERTIFICATE UsersManagement;
+
+		-- Variables para alamcenar datos de usuario que existe.
+		--DECLARE @id int;
+		--DECLARE @userN varchar(20);
+		DECLARE @userpass varchar(100);
+
+		-- Obtener id, nombre de usuario y contraseña
+		--SELECT @UserID = UserID, @userN = Username, @userpass = CONVERT(varchar,DECRYPTBYKEY(Password)) FROM Logins.Users
+		--	WHERE Username = ;
+		SELECT @UserID = UserID, @userpass = CONVERT(varchar,DECRYPTBYKEY(Password)) FROM Logins.Users
+		WHERE Username = @Username;
+
+		--SET @UserID = @id;
+
+		IF (@userpass = @Password)
+		BEGIN
+			SET @Verified = 1;
+		END
+		ELSE
+		BEGIN
+			SET @Verified = 0;
+		END
+
+		--(SELECT UserID, Username, Password FROM Logins.Users WHERE Username = @Username AND Password = CONVERT(varchar,DECRYPTBYKEY(Password)))		
+		--IF EXISTS (SELECT * FROM Logins.Users WHERE Username = @Username AND Password = CONVERT(varchar,DECRYPTBYKEY(Password)))
+		--BEGIN
+		--	SET @Verified = 1;
+		--	SET @UserID = 
+		--END
+
+		CLOSE SYMMETRIC KEY UserPasswordsEncryption;
+	END
+	ELSE
+	BEGIN
+		SET @UsernameRight = 0;
+	END
+GO
+
+DECLARE	@UserID int, @UsernameRight bit, @Verified bit;
+EXEC spVerify_User @UserID OUTPUT, 'admin', '1234', @UsernameRight OUTPUT, @Verified OUTPUT
+
+SELECT @UserID as UserID, @UsernameRight as UsernameRight, @Verified as Verified

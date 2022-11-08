@@ -46,45 +46,22 @@ public class UserRepository : IUserRepository
         var updatedParam = new SqlParameter
         {
             ParameterName = "@Updated",
-            SqlDbType = SqlDbType.Int,
+            SqlDbType = SqlDbType.Bit,
             Direction = ParameterDirection.Output
         };
 
-        var rows = await _context.Database.
+        await _context.Database.
                 ExecuteSqlInterpolatedAsync($@"EXEC spU_User @UserID={entity.UserId}, @Username={entity.Username}, 
                     @Password={entity.PasswordString}, @Updated={updatedParam} OUTPUT");
 
         // var updatedResultd = (int)updatedParam.Value;
 
-        if (rows == 1)
-            return true;
-        else
-            return false;
-        // return (bool)updatedParam.Value;
+        // if (rows == 1)
+        //     return true;
+        // else
+        //     return false;
+        return (bool)updatedParam.Value;
     }
-
-    // public async Task<bool> Update(User entity)
-    // {
-    //     using (Aes aes = Aes.Create())
-    //     {
-    //         entity.Password = AesEncryption.EncryptStringToBytes_Aes(entity.PasswordString, aes.Key, aes.IV);
-    //     }
-
-    //     _context.Entry(entity).State = EntityState.Modified;
-
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!(await Exists(entity.UserId)))
-    //             return false;
-    //         else
-    //             throw;
-    //     }
-    //     return true;
-    // }
 
     public async Task<bool> Delete(int id)
     {
@@ -113,24 +90,50 @@ public class UserRepository : IUserRepository
         return await _context.Users.FirstOrDefaultAsync(u => u.Username == userName);
     }
 
-    public Task<User> VerifyUser(string userName, string password)
+    public async Task<User> VerifyUser(string userName, string password)
     {
-        // var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == userName);
+        var userID = new SqlParameter
+        {
+            ParameterName = "@UserID",
+            SqlDbType = SqlDbType.Int,
+            Direction = ParameterDirection.Output,
+            Value = 2,
+        };
 
-        // if (user is null)
-        //     return user;
-        // // else (user is not null)
-        // // {
-        // using (Aes myAes = Aes.Create())
-        // {
-        //     var decryptedPassword = AesEncryption.DecryptStringFromBytes_Aes(user.Password, myAes.Key, myAes.IV);
-        //     if (decryptedPassword != password)
-        //         user.Password = null!;
-        // }
-        // // }
-        // // return user.Password == password;
-        // return user;
-        return new Task<User>(() => new User());
+        var usernameRight = new SqlParameter
+        {
+            ParameterName = "@UsernameRight",
+            SqlDbType = SqlDbType.Bit,
+            Direction = ParameterDirection.Output
+        };
+
+        var verified = new SqlParameter
+        {
+            ParameterName = "@Verified",
+            SqlDbType = SqlDbType.Bit,
+            Direction = ParameterDirection.Output
+        };
+
+        await _context.Database.
+                ExecuteSqlInterpolatedAsync($@"EXEC spVerify_User @UserID={userID} OUTPUT, @Username={userName}, 
+                    @Password={password}, @UsernameRight={usernameRight} OUTPUT,  @Verified={verified} OUTPUT");
+
+        var user = new User();
+
+        if (!(bool)usernameRight.Value)
+            user.LoginMessage = "Nombre de usuario inválido";
+        else
+        {
+            if (!(bool)verified.Value)
+                user.LoginMessage = "Contraseña inválida";
+            else
+            {
+                user.UserId = (int)userID.Value;
+                user.Loged = true;
+                user.LoginMessage = "Login exitoso";
+            }
+        }
+        return user;
     }
 
     public async Task<bool> Exists(int id)

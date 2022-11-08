@@ -1,6 +1,7 @@
 using backend.Models;
 using backend.Models.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy(name: MyAllowSpecificOrigins,
+//     builder =>
+//     {
+//         builder.WithOrigins("http://127.0.0.1:5500")
+//             .WithMethods("GET", "POST", "PUT", "DELETE")
+//             .WithHeaders(HeaderNames.AccessControlAllowOrigin, HeaderNames.ContentType)
+//             .AllowCredentials();
+//     });
+// });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +44,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+// app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
