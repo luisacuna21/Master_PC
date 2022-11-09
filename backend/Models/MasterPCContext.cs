@@ -27,15 +27,6 @@ namespace backend.Models
         public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
-//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//         {
-//             if (!optionsBuilder.IsConfigured)
-//             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                 optionsBuilder.UseSqlServer("Server=localhost;Database=MasterPC;Trusted_Connection=true");
-//             }
-//         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Brand>(entity =>
@@ -54,7 +45,7 @@ namespace backend.Models
             {
                 entity.ToTable("Customers", "Customer");
 
-                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CCAD90E05A99")
+                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CCAD21C0911A")
                     .IsUnique();
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
@@ -101,7 +92,7 @@ namespace backend.Models
             {
                 entity.ToTable("Employees", "HumanResources");
 
-                entity.HasIndex(e => e.UserId, "UQ__Employee__1788CCADC47071E9")
+                entity.HasIndex(e => e.UserId, "UQ__Employee__1788CCAD0DF091AF")
                     .IsUnique();
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -345,10 +336,12 @@ namespace backend.Models
             {
                 entity.ToTable("Users", "Logins");
 
-                entity.HasIndex(e => e.Username, "UQ__Users__536C85E475853889")
+                entity.HasIndex(e => e.Username, "UQ__Users__536C85E4BDE76A43")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.Property(e => e.Password).IsRequired();
 
                 entity.Property(e => e.Username)
                     .IsRequired()

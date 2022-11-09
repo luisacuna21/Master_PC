@@ -20,11 +20,10 @@ async function loginUser(url, user) {
   // var body = JSON.stringify(user);
 
   const response = await fetch(url, {
-    mode: "no-cors",
+    mode: "cors",
     method: "POST",
     headers: {
-      "Content-type": "application/json; charset=utf-8",
-      accept: "text/plain",
+      "Content-type": "application/json;",
     },
     body: JSON.stringify({
       username: user.userName,
@@ -36,7 +35,7 @@ async function loginUser(url, user) {
   return response;
 }
 
-loginButton.addEventListener("click", function () {
+loginButton.addEventListener("click", async function () {
   var usernameInput = document.getElementById("usernameInput");
   var passwordInput = document.getElementById("passwordInput");
 
@@ -45,9 +44,13 @@ loginButton.addEventListener("click", function () {
 
   var user = new User(username, passwordString);
 
-  loginUser(userURL + "/verify", user).then((response) => {
-    console.log(response);
-  });
+  var response = await loginUser(userURL + "/verify", user);
+
+  console.log(await response.json());
+
+  // await loginUser(userURL + "/verify", user).then((response) => {
+  //   console.log(response.json());
+  // });
 });
 
 // // Ejemplo implementando el metodo POST:

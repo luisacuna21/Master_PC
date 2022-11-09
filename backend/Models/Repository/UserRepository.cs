@@ -1,4 +1,5 @@
 using backend.Models.Security;
+using backend.Models.UserUtilities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -90,8 +91,10 @@ public class UserRepository : IUserRepository
         return await _context.Users.FirstOrDefaultAsync(u => u.Username == userName);
     }
 
-    public async Task<User> VerifyUser(string userName, string password)
+    public async Task<LoginResponse> VerifyUser(LoginRequest request)
     {
+        var response = new LoginResponse();
+
         var userID = new SqlParameter
         {
             ParameterName = "@UserID",
@@ -114,26 +117,34 @@ public class UserRepository : IUserRepository
             Direction = ParameterDirection.Output
         };
 
+        var isEmployee = new SqlParameter
+        {
+            ParameterName = "@IsEEmployee",
+            SqlDbType = SqlDbType.Bit,
+            Direction = ParameterDirection.Output
+        };
+
         await _context.Database.
-                ExecuteSqlInterpolatedAsync($@"EXEC spVerify_User @UserID={userID} OUTPUT, @Username={userName}, 
-                    @Password={password}, @UsernameRight={usernameRight} OUTPUT,  @Verified={verified} OUTPUT");
+                ExecuteSqlInterpolatedAsync($@"EXEC spVerify_User @UserID={userID} OUTPUT, @Username={request.Username}, 
+                    @Password={request.Password}, @UsernameRight={usernameRight} OUTPUT,  @Verified={verified} OUTPUT, @IsEmployee={isEmployee} OUTPUT");
 
         var user = new User();
 
         if (!(bool)usernameRight.Value)
-            user.LoginMessage = "Nombre de usuario inválido";
+            response.Message = "Nombre de usuario inválido";
         else
         {
             if (!(bool)verified.Value)
-                user.LoginMessage = "Contraseña inválida";
+                response.Message = "Contraseña inválida";
             else
             {
-                user.UserId = (int)userID.Value;
-                user.Loged = true;
-                user.LoginMessage = "Login exitoso";
+                response.UserId = (int)userID.Value;
+                response.Message = "Login exitoso";
+                response.IsEmployee = (bool)isEmployee.Value;
+                // user.Loged = true;
             }
         }
-        return user;
+        return response;
     }
 
     public async Task<bool> Exists(int id)

@@ -19,7 +19,8 @@ GO
 CREATE TABLE Logins.Users(
 	UserID int PRIMARY KEY IDENTITY (1,1),
 	Username varchar(20) UNIQUE NOT NULL,
-	Password varbinary(max)
+	Password varbinary(max) NOT NULL,
+	IsEmployee bit NOT NULL
 )
 GO
 
@@ -57,11 +58,6 @@ CREATE TABLE Customer.Customers (
 	Country varchar(50) NOT NULL,
 	Phone varchar(24) NOT NULL,
 	UserID int UNIQUE FOREIGN KEY REFERENCES Logins.Users (UserID)
-	--ShippingAddress varchar (100) NULL ,
-	--City varchar (30) NULL ,
-	--PostalCode varchar (10) NULL ,
-	--Country varchar (50) NULL ,
-	--Phone varchar (24) NULL ,
 )
 GO
 --ALTER TABLE	Customer.Customers ADD UserID int FOREIGN KEY REFERENCES Logins.Users (UserID)
@@ -171,6 +167,7 @@ GO
 CREATE PROC spI_User
 @Username varchar(20),
 @Password varchar(100),
+@IsEmployee bit,
 @UserID int OUTPUT
 AS
 	BEGIN TRAN
@@ -178,8 +175,8 @@ AS
 		OPEN SYMMETRIC KEY UserPasswordsEncryption
 		DECRYPTION BY CERTIFICATE UsersManagement;
 
-		INSERT INTO Logins.Users (Username, Password)
-			VALUES (@Username, ENCRYPTBYKEY(Key_GUID('UserPasswordsEncryption'), @Password));
+		INSERT INTO Logins.Users (Username, Password, IsEmployee)
+			VALUES (@Username, ENCRYPTBYKEY(Key_GUID('UserPasswordsEncryption'), @Password), @IsEmployee);
 
 		CLOSE SYMMETRIC KEY UserPasswordsEncryption;
 
@@ -192,10 +189,10 @@ AS
 	END CATCH
 GO
 
-EXEC spI_User 'admin', '1234', 0
+EXEC spI_User 'admin', '1234', 1, 0
 go
 
-ALTER PROC spU_User
+CREATE PROC spU_User
 @UserID int,
 @Username varchar(20),
 @Password varchar(100),
@@ -222,12 +219,13 @@ AS
 	END CATCH
 GO
 
-ALTER PROC spVerify_User
+CREATE PROC spVerify_User
 @UserID int = 0 OUTPUT,
 @Username varchar(20),
 @Password varchar(100),
 @UsernameRight bit = 0 OUTPUT,
-@Verified bit = 0 OUTPUT
+@Verified bit = 0 OUTPUT,
+@IsEmployee bit = 0 OUTPUT
 AS
 	IF EXISTS (SELECT * FROM Logins.Users WHERE Username = @Username)
 	BEGIN
@@ -241,10 +239,7 @@ AS
 		--DECLARE @userN varchar(20);
 		DECLARE @userpass varchar(100);
 
-		-- Obtener id, nombre de usuario y contraseña
-		--SELECT @UserID = UserID, @userN = Username, @userpass = CONVERT(varchar,DECRYPTBYKEY(Password)) FROM Logins.Users
-		--	WHERE Username = ;
-		SELECT @UserID = UserID, @userpass = CONVERT(varchar,DECRYPTBYKEY(Password)) FROM Logins.Users
+		SELECT @UserID = UserID, @userpass = CONVERT(varchar,DECRYPTBYKEY(Password)), @IsEmployee = IsEmployee FROM Logins.Users
 		WHERE Username = @Username;
 
 		--SET @UserID = @id;
@@ -258,13 +253,6 @@ AS
 			SET @Verified = 0;
 		END
 
-		--(SELECT UserID, Username, Password FROM Logins.Users WHERE Username = @Username AND Password = CONVERT(varchar,DECRYPTBYKEY(Password)))		
-		--IF EXISTS (SELECT * FROM Logins.Users WHERE Username = @Username AND Password = CONVERT(varchar,DECRYPTBYKEY(Password)))
-		--BEGIN
-		--	SET @Verified = 1;
-		--	SET @UserID = 
-		--END
-
 		CLOSE SYMMETRIC KEY UserPasswordsEncryption;
 	END
 	ELSE
@@ -273,7 +261,7 @@ AS
 	END
 GO
 
-DECLARE	@UserID int, @UsernameRight bit, @Verified bit;
-EXEC spVerify_User @UserID OUTPUT, 'admin', '1234', @UsernameRight OUTPUT, @Verified OUTPUT
+--DECLARE	@UserID int, @UsernameRight bit, @Verified bit;
+--EXEC spVerify_User @UserID OUTPUT, 'admin', '1234', @UsernameRight OUTPUT, @Verified OUTPUT
 
-SELECT @UserID as UserID, @UsernameRight as UsernameRight, @Verified as Verified
+--SELECT @UserID as UserID, @UsernameRight as UsernameRight, @Verified as Verified
