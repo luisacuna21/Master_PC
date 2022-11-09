@@ -8,7 +8,8 @@ namespace backend.Models
     {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public byte[] Password { get; set; }
+        // public byte[] Password { get; set; }
+        public string Password { get; set; }
         public bool IsEmployee { get; set; }
 
         public virtual Customer Customer { get; set; }
