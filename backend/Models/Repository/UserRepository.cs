@@ -28,6 +28,9 @@ public class UserRepository : IUserRepository
     // }
     public async Task<User> Add(User entity)
     {
+        if(_context.Users.Any(u => u.Username == entity.Username))
+            throw new ApplicationException("Username already exists");
+
         var userId = new SqlParameter
         {
             ParameterName = "@UserId",
@@ -35,7 +38,7 @@ public class UserRepository : IUserRepository
             Direction = ParameterDirection.Output
         };
 
-        await _context.Database.ExecuteSqlInterpolatedAsync($@"EXEC spI_User @Username={entity.Username}, @Password={entity.PasswordString}, @UserId={userId} OUTPUT");
+        await _context.Database.ExecuteSqlInterpolatedAsync($@"EXEC spI_User @Username={entity.Username}, @Password={entity.Password}, @IsEmployee={entity.IsEmployee}, @UserId={userId} OUTPUT");
 
         var outputId = (int)userId.Value;
 
@@ -53,15 +56,9 @@ public class UserRepository : IUserRepository
 
         await _context.Database.
                 ExecuteSqlInterpolatedAsync($@"EXEC spU_User @UserID={entity.UserId}, @Username={entity.Username}, 
-                    @Password={entity.PasswordString}, @Updated={updatedParam} OUTPUT");
+                    @Password={entity.Password}, @Updated={updatedParam} OUTPUT");
 
-        // var updatedResultd = (int)updatedParam.Value;
-
-        // if (rows == 1)
-        //     return true;
-        // else
-        //     return false;
-        return (bool)updatedParam.Value;
+         return (bool)updatedParam.Value;
     }
 
     public async Task<bool> Delete(int id)
@@ -119,7 +116,7 @@ public class UserRepository : IUserRepository
 
         var isEmployee = new SqlParameter
         {
-            ParameterName = "@IsEEmployee",
+            ParameterName = "@IsEmployee",
             SqlDbType = SqlDbType.Bit,
             Direction = ParameterDirection.Output
         };
@@ -127,8 +124,6 @@ public class UserRepository : IUserRepository
         await _context.Database.
                 ExecuteSqlInterpolatedAsync($@"EXEC spVerify_User @UserID={userID} OUTPUT, @Username={request.Username}, 
                     @Password={request.Password}, @UsernameRight={usernameRight} OUTPUT,  @Verified={verified} OUTPUT, @IsEmployee={isEmployee} OUTPUT");
-
-        var user = new User();
 
         if (!(bool)usernameRight.Value)
             response.Message = "Nombre de usuario inválido";
@@ -138,10 +133,13 @@ public class UserRepository : IUserRepository
                 response.Message = "Contraseña inválida";
             else
             {
+                var user = await _context.Users.FindAsync((int)userID.Value);
+                string token = JwtUtilities.GenerateToken(user);
+
                 response.UserId = (int)userID.Value;
                 response.Message = "Login exitoso";
                 response.IsEmployee = (bool)isEmployee.Value;
-                // user.Loged = true;
+                response.Token = token;
             }
         }
         return response;

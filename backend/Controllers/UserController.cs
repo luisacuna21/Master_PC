@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using backend.Models.Repository;
 using backend.Models.UserUtilities;
 
 namespace backend.Controllers
 {
-    [Route("api/users")]
     [ApiController]
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -54,11 +48,19 @@ namespace backend.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(UserSignUpRequest userRequest)
         {
-            if (user is null)
+            if (userRequest is null)
                 return BadRequest();
-            return await _userRepository.Add(user);
+
+            var user = new User
+            {
+                Username = userRequest.Username,
+                Password = userRequest.Password,
+                IsEmployee = userRequest.IsEmployee
+            };
+
+            return Ok(await _userRepository.Add(user));
         }
 
         // DELETE: api/User/5

@@ -1,7 +1,6 @@
 using backend.Models;
 using backend.Models.Repository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // builder.Services.AddDbContext<MasterPCContext>(options =>
 //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<MasterPCContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("MasterPCCloud")));
+builder.Services.AddDbContext<MasterPCContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MasterPCCloud")));
 
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<IBrandRepository, BrandRepository>();
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IShipperRepository, ShipperRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

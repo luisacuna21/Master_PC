@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="h-full sm:flex sm:items-center sm:justify-center">
+        <div class="sm:m-5 bg-blue-300 sm:bg-blue-300 overflow-hidden shadow sm:rounded-md p-2 sm:p-4 md:p-8">
+            <div class="sm:grid sm:grid-cols-2 h-screen sm:h-fit">
+                <div class="col-start-1">
+                    <div class="px-4 sm:px-0">
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">Información personal</h3>
+                    </div>
+                </div>
+                <div class="mt-5 md:col-span-1 sm:mt-0">
+                    <form action="#" method="POST">
+                        <div class="bg-white overflow-hidden shadow sm:rounded-md">
+                            <div class="px-4 py-5 sm:p-4">
+                                <div class="sm:grid sm:grid-cols-2 sm:gap-1 md:gap-3">
+                                    <div class="row-start-1 col-start-1">
+                                        <label for="first-name" class="block text-sm font-medium text-gray-700">First
+                                            name</label>
+                                        <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    </div>
+
+                                    <div class="row-start-2 sm:row-start-1 md:col-start-2">
+                                        <label for="last-name" class="block text-sm font-medium text-gray-700">Last
+                                            name</label>
+                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    </div>
+
+                                    <div class="col-start-1 col-span-1">
+                                        <label for="email-address" class="block text-sm font-medium text-gray-700">Email
+                                            address</label>
+                                        <input type="text" name="email-address" id="email-address" autocomplete="email"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    </div>
+
+                                    <div class="col-span-1 sm:col-span-3">
+                                        <label for="country"
+                                            class="block text-sm font-medium text-gray-700">Country</label>
+                                        <select id="country" name="country" autocomplete="country-name"
+                                            class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                            <option>United States</option>
+                                            <option>Canada</option>
+                                            <option>Mexico</option>
+                                        </select>   
+                                    </div>
+
+                                    <div class="col-start-1 col-span-3">
+                                        <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
+                                        <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        </div>
+                        
+                                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                                        <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                                        <input type="text" name="city" id="city" autocomplete="address-level2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        </div>
+                        
+                                        <div class="col-span-2 sm:col-span-3 lg:col-span-2">
+                                        <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
+                                        <input type="text" name="region" id="region" autocomplete="address-level1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        </div>
+                        
+                                        <div class="col-span-2 sm:col-span-3 lg:col-span-2">
+                                        <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                                        <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 mt-5">
+                                    <button type="submit"
+                                        class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

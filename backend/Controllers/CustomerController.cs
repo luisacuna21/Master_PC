@@ -33,7 +33,7 @@ namespace backend.Controllers
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
             var customer = await _customerRepository.GetById(id);
-            if(customer is null)
+            if (customer is null)
                 return NotFound();
             return customer;
         }
@@ -43,7 +43,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> PutCustomer(int id, Customer Customer)
         {
-            if(id != Customer.CustomerId)
+            if (id != Customer.CustomerId)
                 return BadRequest();
 
             return await _customerRepository.Update(Customer);
@@ -52,12 +52,23 @@ namespace backend.Controllers
         // POST: api/Customer
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer Customer)
+        public async Task<ActionResult<Customer>> PostCustomer(Models.CustomerUtilities.CustomerSignUpRequest signUpRequest)
         {
-            if(Customer is null)
+            var customer = new Customer
+            {
+                FullName = signUpRequest.FullName,
+                Email = signUpRequest.Email,
+                City = signUpRequest.City,
+                PostalCode = signUpRequest.PostalCode,
+                Country = signUpRequest.Country,
+                Phone = signUpRequest.Phone,
+                UserId = signUpRequest.UserId
+            };
+
+            if (signUpRequest is null)
                 return BadRequest();
 
-            return await _customerRepository.Add(Customer);
+            return Ok(await _customerRepository.Add(customer));
         }
 
         // DELETE: api/Customer/5
@@ -66,6 +77,6 @@ namespace backend.Controllers
         {
             return await _customerRepository.Delete(id);
         }
-    
+
     }
 }

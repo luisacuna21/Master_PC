@@ -16,11 +16,11 @@ namespace backend.Models
         public virtual Employee Employee { get; set; }
     }
 
-    public partial class User
-    {
-        [NotMapped]
-        public string PasswordString { get; set; }
-        // public bool Loged { get; set; }
-        // public string LoginMessage { get; set; }
-    }
+    // public partial class User
+    // {
+    //     [NotMapped]
+    //     public string PasswordString { get; set; }
+    //     // public bool Loged { get; set; }
+    //     // public string LoginMessage { get; set; }
+    // }
 }
