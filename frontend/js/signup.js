@@ -84,46 +84,86 @@ async function addCustomer(url, customer) {
   return response;
 }
 
+async function loginUser(url, user) {
+  const response = await fetch(url, {
+    mode: "cors",
+    method: "POST",
+    headers: {
+      "Content-type": "application/json;",
+    },
+    body: JSON.stringify({
+      username: user.username,
+      password: user.password,
+    }),
+  }).catch((error) => {
+    console.log(error);
+  });
+  return response;
+}
+
+async function getUserById(url, id) {
+  const response = await fetch(url + `/${id}`, {
+    mode: "cors",
+    method: "GET",
+    headers: {
+      "Content-type": "application/json;",
+    },
+  }).catch((error) => {
+    console.log(error);
+  });
+  return response;
+}
+
+// TODO: later
+// passwordAgainInput.addEventListener("keyup", function () {
+//   if (passwordInput.value != passwordAgainInput.value) {
+//     passwordAgainInput.classList.toggle("border-red-600");
+//   } else {
+//     // passwordAgainInput.setCustomValidity("");
+//   }
+// });
+
 saveBtn.addEventListener("click", async function () {
-  var firstName = firstNameInput.value;
-  var lastName = lastNameInput.value;
-  var email = emailInput.value;
-  var country = countryInput.value;
-  var city = cityInput.value;
-  var postalCode = postalCodeInput.value;
-  var phone = phoneInput.value;
-  var username = usernameInput.value;
-  var password = passwordInput.value;
-  var passwordAgain = passwordAgainInput.value;
+  let firstName = firstNameInput.value;
+  let lastName = lastNameInput.value;
+  let email = emailInput.value;
+  let country = countryInput.value;
+  let city = cityInput.value;
+  let postalCode = postalCodeInput.value;
+  let phone = phoneInput.value;
+  let username = usernameInput.value;
+  let password = passwordInput.value;
+  let passwordAgain = passwordAgainInput.value;
 
   if (password !== passwordAgain) {
     alert("Las contraseñas no coinciden!");
     return;
   }
 
+  // Adding user
   // Is not a employee. So, IsEmployee = false
   // (Every account introduced in this page is a customer account)
-  var userToAdd = new User(username, password, false);
-
-  var userResponse = await addUser(userURL, userToAdd);
-
+  let userToAdd = new User(username, password, false);
+  
+  let userResponse = await addUser(userURL, userToAdd);
+  
   if (!userResponse.ok) {
-    var message = `Ha ocurrido un error: ${userResponse.status}`;
-    throw new Error(message);
+    throwError(userResponse.status)
   }
 
-  var userAdded = await userResponse.json();
+  let userAdded = await userResponse.json();
   console.log(userAdded);
-  
+
   alert("Usuario agregado correctamente!" + userAdded.userId);
 
-  var customer = new Customer(
+  // Adding customer after adding user
+  let customer = new Customer(
     firstName,
     lastName,
     email,
-    country,
     city,
     postalCode,
+    country,
     phone,
     userAdded.userId
   );
@@ -132,27 +172,45 @@ saveBtn.addEventListener("click", async function () {
 
   alert("Check");
 
-  var customerResponse = await addCustomer(customerURL, customer);
+  let customerResponse = await addCustomer(customerURL, customer);
 
   if (!customerResponse.ok) {
-    var message = `Ha ocurrido un error: ${customerResponse.status}`;
-    throw new Error(message);
+    throwError(customerResponse.status);
   }
 
-  var customerAdded = customerResponse.json();
+  let customerAdded = customerResponse.json();
   console.log(customerAdded);
 
-  localStorage.setItem("userId", userAdded.userId);
-  localStorage.setItem("isEmployee", userAdded.isEmployee);
-  localStorage.setItem("customerId", customerAdded.customerId);
+  // Login user
+  // First get the user by user id  
+  let userToLoginResponse = await getUserById(userURL, userAdded.userId);
+  let userToLogin = await userToLoginResponse.json();
 
-  // console.log(localStorage.getItem("userId"));
-  // console.log(localStorage.getItem("userName"));
-  // console.log(localStorage.getItem("isEmployee"));
+  // Then, login
+  let loginUserResponse = await loginUser(userURL + '/verify', userToLogin);
+
+  if (!loginUserResponse.ok) {
+    throwError(loginUserResponse.status);
+  }
+
+  let loggedUser = await loginUserResponse.json();
+
+  // Adding cookie
+  document.cookie = "userId=" + loggedUser.userId;
+  document.cookie = "token=" + loggedUser.token;
+
+  // localStorage.setItem("userId", userAdded.userId);
+  // localStorage.setItem("isEmployee", userAdded.isEmployee);
+  // localStorage.setItem("customerId", customerAdded.customerId);
 
   alert(
-    `Usuario registrado con éxito! \n UserId = ${userAdded.userId} \n userName = ${userAdded.userName} \n isEmployee = ${userAdded.isEmployee} \n customerId = ${customerAdded.customerId}`
+    `Usuario registrado con éxito! \n UserId = ${userAdded.userId} \n userName = ${userAdded.userName} \n isEmployee = ${userAdded.isEmployee} \n customerId = ${customerAdded.customerId} \n \n Inicio de sesión: \n userId: ${loggedUser.userId}, \n token: ${loggedUser.token}`
   );
 
   window.location.href = "index.html";
 });
+
+function throwError(message) {
+  alert(`Ha ocurrido un error: ${message}`);
+  throw new Error(`Ha ocurrido un error: ${message}`);
+}

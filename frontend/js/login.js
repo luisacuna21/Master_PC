@@ -10,15 +10,13 @@ const loginButton = document.getElementById("loginButton");
 // console.log(localStorage.getItem("customerId"));
 
 class User {
-  constructor(userName, passwordString) {
-    this.userName = userName;
+  constructor(username, password) {
+    this.username = username;
     this.password = password;
   }
 }
 
 async function loginUser(url, user) {
-  // var body = JSON.stringify(user);
-
   const response = await fetch(url, {
     mode: "cors",
     method: "POST",
@@ -26,8 +24,8 @@ async function loginUser(url, user) {
       "Content-type": "application/json;",
     },
     body: JSON.stringify({
-      username: user.userName,
-      password: user.passwordString,
+      username: user.username,
+      password: user.password,
     }),
   }).catch((error) => {
     console.log(error);
@@ -37,17 +35,32 @@ async function loginUser(url, user) {
 
 loginButton.addEventListener("click", async function () {
   // loginButton.removeEventListener("keydown", async function () {});
-  var usernameInput = document.getElementById("usernameInput");
-  var passwordInput = document.getElementById("passwordInput");
+  let usernameInput = document.getElementById("usernameInput");
+  let passwordInput = document.getElementById("passwordInput");
 
-  var username = usernameInput.value;
-  var passwordString = passwordInput.value;
+  let username = usernameInput.value;
+  let passwordString = passwordInput.value;
 
-  var user = new User(username, passwordString);
+  let userToLogin = new User(username, passwordString);
 
-  var response = await loginUser(userURL + "/verify", user);
+  let response = await loginUser(userURL + "/verify", userToLogin);
 
-  console.log(await response.json());
+  let loginResponse = await response.json();
+
+  if (response.ok) {
+    if (loginResponse.userId != 0) {
+      document.cookie = "userId=" + loginResponse.userId;
+      document.cookie = "token=" + loginResponse.token;
+
+      console.log(loginResponse);
+      
+      // alert(`Login successful \n ${loginResponse.userId} \n ${loginResponse.token}`);
+      
+      window.location.href = "index.html";
+    }else{
+      alert(loginResponse.message);
+    }
+  }
 });
 
 // If key down avobe the button is enter, then do nothing
