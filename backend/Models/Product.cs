@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
@@ -21,6 +22,9 @@ namespace backend.Models
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
         public string ProductDescription { get; set; }
+
+        [NotMapped]
+        public ProductPhoto FirstPhoto { get; set; }
 
         public virtual Brand Brand { get; set; }
         public virtual ProductCategory Category { get; set; }

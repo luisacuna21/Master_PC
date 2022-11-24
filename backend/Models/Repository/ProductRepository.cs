@@ -54,14 +54,20 @@ public class ProductRepository : IProductRepository
 
         foreach (var p in products)
         {
+            p.FirstPhoto = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).FirstAsync();
+        }
+        return products;
+    }
+
+    public async Task<IEnumerable<Product>> GetAllWithAllPhotos()
+    {
+        var products = await _context.Products.ToListAsync();
+
+        foreach (var p in products)
+        {
             p.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToListAsync();
         }
-        // products
-        //     .ForEach((p) => 
-        //         p.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToListAsync());
-
         return products;
-        // return await _context.Products.ToListAsync();
     }
 
     public async Task<Product> GetById(int id)

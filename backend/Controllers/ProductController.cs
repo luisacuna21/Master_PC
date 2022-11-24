@@ -22,11 +22,31 @@ namespace backend.Controllers
         }
 
         // GET: api/Product
-        [HttpGet]
-        public async Task<IEnumerable<Product>> GetProducts()
+        // [HttpGet]
+        // public async Task<IEnumerable<Product>> GetProducts()
+        // {
+        //     return await _productRepository.GetAll();
+        // }
+
+        [Route("verify")]
+        [HttpGet("{allPhotos}")]
+        public async Task<IEnumerable<Product>> GetProducts(bool allPhotos)
         {
-            return await _productRepository.GetAll();
+            if (allPhotos)
+                return await _productRepository.GetAll();
+            else
+                return await _productRepository.GetAllWithAllPhotos();
         }
+
+        // // GET: api/Product/5
+        // [HttpGet("{allPhotos}")]
+        // public async Task<ActionResult<Product>> GetProduct(bool allPhotos)
+        // {
+        //     var product = await _productRepository.GetById(id);
+        //     if (product is null)
+        //         return NotFound();
+        //     return product;
+        // }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
