@@ -3,6 +3,10 @@ const userURL = "https://localhost:7138/api/users";
 const loginDiv = document.querySelector("#loginDiv");
 const userAccountDiv = document.querySelector("#userAccountDiv");
 
+const mobileMenuDiv = document.querySelector("#mobileMenuDiv");
+const closeMobileMenuBtn = document.querySelector("#closeMobileMenuBtn");
+const openMobileMenuBtn = document.querySelector("#openMobileMenuBtn");
+
 const solutionsBtn = document.querySelector("#solutionsBtn");
 const solutionsSubmenu = document.querySelector("#solutionsSubmenu");
 
@@ -88,4 +92,13 @@ logoutLink.addEventListener("click", () => {
   localStorage.clear();
   document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+});
+
+// mobileMenuDiv
+closeMobileMenuBtn.addEventListener("mousedown", function (e) {
+  mobileMenuDiv.classList.add("hidden");
+});
+
+openMobileMenuBtn.addEventListener("mousedown", function (e) {
+  mobileMenuDiv.classList.remove("hidden");
 });

@@ -50,7 +50,18 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<Product>> GetAll()
     {
-        return await _context.Products.ToListAsync();
+        var products = await _context.Products.ToListAsync();
+
+        foreach (var p in products)
+        {
+            p.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToListAsync();
+        }
+        // products
+        //     .ForEach((p) => 
+        //         p.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToListAsync());
+
+        return products;
+        // return await _context.Products.ToListAsync();
     }
 
     public async Task<Product> GetById(int id)

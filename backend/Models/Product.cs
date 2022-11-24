@@ -8,6 +8,7 @@ namespace backend.Models
         public Product()
         {
             OrderDetails = new HashSet<OrderDetail>();
+            ProductPhotos = new HashSet<ProductPhoto>();
         }
 
         public int ProductId { get; set; }
@@ -19,10 +20,11 @@ namespace backend.Models
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
-        public byte[] Photo { get; set; }
+        public string ProductDescription { get; set; }
 
         public virtual Brand Brand { get; set; }
         public virtual ProductCategory Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }

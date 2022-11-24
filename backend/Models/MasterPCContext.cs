@@ -23,6 +23,7 @@ namespace backend.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<ProductPhoto> ProductPhotos { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -45,7 +46,7 @@ namespace backend.Models
             {
                 entity.ToTable("Customers", "Customer");
 
-                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CCAD21C0911A")
+                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CCAD065F2AEE")
                     .IsUnique();
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
@@ -85,14 +86,14 @@ namespace backend.Models
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Customer)
                     .HasForeignKey<Customer>(d => d.UserId)
-                    .HasConstraintName("FK__Customers__UserI__2C3393D0");
+                    .HasConstraintName("FK__Customers__UserI__68487DD7");
             });
 
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employees", "HumanResources");
 
-                entity.HasIndex(e => e.UserId, "UQ__Employee__1788CCAD0DF091AF")
+                entity.HasIndex(e => e.UserId, "UQ__Employee__1788CCAD04A5BCA9")
                     .IsUnique();
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -138,7 +139,7 @@ namespace backend.Models
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Employee)
                     .HasForeignKey<Employee>(d => d.UserId)
-                    .HasConstraintName("FK__Employees__UserI__286302EC");
+                    .HasConstraintName("FK__Employees__UserI__6477ECF3");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -183,12 +184,12 @@ namespace backend.Models
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Orders__Customer__403A8C7D");
+                    .HasConstraintName("FK__Orders__Customer__7C4F7684");
 
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("FK__Orders__ShipperI__4222D4EF");
+                    .HasConstraintName("FK__Orders__ShipperI__7E37BEF6");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -211,13 +212,13 @@ namespace backend.Models
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Order__44FF419A");
+                    .HasConstraintName("FK__OrderDeta__Order__01142BA1");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Produ__45F365D3");
+                    .HasConstraintName("FK__OrderDeta__Produ__02084FDA");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -230,9 +231,14 @@ namespace backend.Models
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
+                entity.Property(e => e.ProductDescription)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(40)
+                    .HasMaxLength(250)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
@@ -249,13 +255,13 @@ namespace backend.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.BrandId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__BrandI__37A5467C");
+                    .HasConstraintName("FK__Products__BrandI__73BA3083");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__Catego__38996AB5");
+                    .HasConstraintName("FK__Products__Catego__74AE54BC");
             });
 
             modelBuilder.Entity<ProductCategory>(entity =>
@@ -268,6 +274,23 @@ namespace backend.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ProductPhoto>(entity =>
+            {
+                entity.ToTable("ProductPhotos", "Inventory");
+
+                entity.Property(e => e.ProductPhotoId).HasColumnName("ProductPhotoID");
+
+                entity.Property(e => e.Photo).IsRequired();
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                // entity.HasOne(d => d.Product)
+                //     .WithMany(p => p.ProductPhotos)
+                //     .HasForeignKey(d => d.ProductId)
+                //     .OnDelete(DeleteBehavior.ClientSetNull)
+                //     .HasConstraintName("FK__ProductPh__Produ__29221CFB");
             });
 
             modelBuilder.Entity<Shipper>(entity =>
@@ -329,19 +352,22 @@ namespace backend.Models
                     .WithMany(p => p.ShippingAddresses)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ShippingA__Custo__2F10007B");
+                    .HasConstraintName("FK__ShippingA__Custo__6B24EA82");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users", "Logins");
 
-                entity.HasIndex(e => e.Username, "UQ__Users__536C85E4BDE76A43")
+                entity.HasIndex(e => e.Username, "UQ__Users__536C85E43AE9EC8A")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Username)
                     .IsRequired()
