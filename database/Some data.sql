@@ -15,7 +15,8 @@ GO
 	-- Products
 
 INSERT INTO Inventory.Products 
-				(ProductName, 
+				(ProductName,
+				ProductShortName,
 				BrandID, 
 				CategoryID, 
 				UnitPrice, 
@@ -26,6 +27,7 @@ INSERT INTO Inventory.Products
 				ProductDescription)
 			VALUES
 				('ROG Zephyrus G15 Ultra Slim Gaming Laptop, 15.6” 165Hz QHD Display, GeForce RTX 3080, AMD Ryzen 9 5900HS, 16GB DDR4, 1TB PCIe NVMe SSD, Wi-Fi 6, Windows 10, Eclipse Gray, GA503QS-BS96Q',
+				'ROG Zephyrus G15 Gaming Laptop, 15.6” 165Hz, GeForce RTX 3080, Ryzen 9 5900HS, 16GB DDR4, 1TB SSD',
 				2,
 				1,
 				1500.00,
@@ -41,7 +43,8 @@ INSERT INTO Inventory.Products
 GO
 
 INSERT INTO Inventory.Products 
-				(ProductName, 
+				(ProductName,
+				ProductShortName,
 				BrandID, 
 				CategoryID, 
 				UnitPrice, 
@@ -52,6 +55,7 @@ INSERT INTO Inventory.Products
 				ProductDescription)
 			VALUES
 				('2022 ASUS ROG Zephyrus G14 GA402RJ-G14.R96700 (AMD Ryzen 9 6900HS, 16GB RAM, 1TB NVMe SSD, AMD Radeon RX 6700S, 14" WQXGA 120Hz, Windows 11) Gaming Notebook - Moonlight White',
+				'2022 ROG Zephyrus G14 (Ryzen 9 6900HS, 16GB RAM, 1TB SSD, AMD Radeon RX 6700S, 14" WQXGA 120Hz)',
 				2,
 				1,
 				1350.00,
@@ -67,7 +71,8 @@ INSERT INTO Inventory.Products
 GO
 
 INSERT INTO Inventory.Products 
-				(ProductName, 
+				(ProductName,
+				ProductShortName,
 				BrandID, 
 				CategoryID, 
 				UnitPrice, 
@@ -78,6 +83,7 @@ INSERT INTO Inventory.Products
 				ProductDescription)
 			VALUES
 				('2022 HP Spectre 2-in-1 Laptop 16" 3K+ IPS Touchscreen Intel EVO Platform 12th Core i7-12700H Iris Xe Graphics 16GB DDR4 2TB SSD Wi-Fi 6e Thunderbolt 4 Backlit KB w/ FP and Pen Windows 11.',
+				'2022 HP Spectre 2-in-1 Laptop 16" 12th Core i7-12700H Iris Xe Graphics 16GB DDR4 2TB SSD',
 				1,
 				1,
 				1630.00,

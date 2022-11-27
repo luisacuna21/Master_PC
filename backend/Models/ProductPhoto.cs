@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
@@ -7,8 +8,9 @@ namespace backend.Models
     {
         public int ProductPhotoId { get; set; }
         public int ProductId { get; set; }
-        public byte[] Photo { get; set; }
+        [NotMapped]
+        public string PhotoBase64 { get; set; }
 
-        // public virtual Product Product { get; set; }
+        // public  Product Product { get; set; }
     }
 }

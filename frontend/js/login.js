@@ -9,6 +9,10 @@ const loginButton = document.getElementById("loginButton");
 // console.log(localStorage.getItem("isEmployee"));
 // console.log(localStorage.getItem("customerId"));
 
+document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+document.cookie = "isEmployee=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
 class User {
   constructor(username, password) {
     this.username = username;
@@ -51,13 +55,22 @@ loginButton.addEventListener("click", async function () {
     if (loginResponse.userId != 0) {
       document.cookie = "userId=" + loginResponse.userId;
       document.cookie = "token=" + loginResponse.token;
+      document.cookie = "isEmployee=" + loginResponse.isEmployee;
 
       console.log(loginResponse);
-      
-      // alert(`Login successful \n ${loginResponse.userId} \n ${loginResponse.token}`);
-      
-      window.location.href = "index.html";
-    }else{
+
+      alert(
+        `Login successful \n ${loginResponse.userId} \n ${loginResponse.token}`
+      );
+
+      let isEmployee = loginResponse.isEmployee;
+
+      if (isEmployee) {
+        window.location.href = "management/index.html";
+      } else {
+        window.location.href = "index.html";
+      }
+    } else {
       alert(loginResponse.message);
     }
   }

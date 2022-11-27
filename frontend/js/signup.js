@@ -198,10 +198,9 @@ saveBtn.addEventListener("click", async function () {
   // Adding cookie
   document.cookie = "userId=" + loggedUser.userId;
   document.cookie = "token=" + loggedUser.token;
+  document.cookie = "isEmployee=" + loggedUser.isEmployee;
 
   // localStorage.setItem("userId", userAdded.userId);
-  // localStorage.setItem("isEmployee", userAdded.isEmployee);
-  // localStorage.setItem("customerId", customerAdded.customerId);
 
   alert(
     `Usuario registrado con éxito! \n UserId = ${userAdded.userId} \n userName = ${userAdded.userName} \n isEmployee = ${userAdded.isEmployee} \n customerId = ${customerAdded.customerId} \n \n Inicio de sesión: \n userId: ${loggedUser.userId}, \n token: ${loggedUser.token}`

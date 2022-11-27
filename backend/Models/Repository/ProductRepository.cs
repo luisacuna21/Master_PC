@@ -54,25 +54,52 @@ public class ProductRepository : IProductRepository
 
         foreach (var p in products)
         {
+            p.Brand = await _context.Brands.Where(b => b.BrandId == p.BrandId).FirstAsync();
+            p.Category = await _context.ProductCategories.Where(pc => pc.ProductCategoryId == p.CategoryId).FirstAsync();
             p.FirstPhoto = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).FirstAsync();
+            // p.FirstPhoto.PhotoBase64 = Convert.ToBase64String(p.FirstPhoto.Photo);
         }
+
+        // UpdateOldPhotos();
+        // SaveBase64Photo();
         return products;
     }
 
-    public async Task<IEnumerable<Product>> GetAllWithAllPhotos()
+    private void UpdateOldPhotos()
     {
-        var products = await _context.Products.ToListAsync();
+        var photos = _context.ProductPhotos.Where(pp => pp.ProductPhotoId <= 21).ToList();
 
-        foreach (var p in products)
-        {
-            p.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToListAsync();
-        }
-        return products;
+        photos.ForEach(p => p.PhotoBase64 = "data:image/jpg;base64," + p.PhotoBase64);
+
+        _context.SaveChanges();
     }
+
+    // private void SaveBase64Photo()
+    // {
+    //     var updated = false;
+    //     var products = _context.Products.ToList();
+
+    //     products.ForEach(p =>
+    //     {
+    //         p.ProductPhotos = _context.ProductPhotos.Where(pp => pp.ProductId == p.ProductId).ToList();
+    //         p.ProductPhotos.ToList().ForEach(pp =>
+    //         {
+    //             pp.PhotoBase64 = Convert.ToBase64String(pp.Photo);
+    //         });
+    //         updated = this.Update(p).Result;
+    //         Console.WriteLine(updated);
+    //     });
+    // }
 
     public async Task<Product> GetById(int id)
     {
-        return await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync(id);
+
+        product.ProductPhotos = await _context.ProductPhotos.Where(pp => pp.ProductId == product.ProductId).ToListAsync();
+        // product.ProductPhotos.ToList().ForEach(pp => pp.PhotoBase64 = Convert.ToBase64String(pp.Photo));
+
+        return product;
+        // return await _context.Products.FindAsync(id);
     }
 
     public async Task<bool> Exists(int id)

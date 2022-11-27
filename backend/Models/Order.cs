@@ -21,8 +21,8 @@ namespace backend.Models
         public string ShippingPostalCode { get; set; }
         public string Shippingcountry { get; set; }
 
-        public virtual Customer Customer { get; set; }
-        public virtual Shipper Shipper { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public Customer Customer { get; set; }
+        public Shipper Shipper { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

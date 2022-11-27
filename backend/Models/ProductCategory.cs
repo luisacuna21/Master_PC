@@ -7,12 +7,12 @@ namespace backend.Models
     {
         public ProductCategory()
         {
-            Products = new HashSet<Product>();
+            // Products = new HashSet<Product>();
         }
 
         public int ProductCategoryId { get; set; }
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        // public ICollection<Product> Products { get; set; }
     }
 }

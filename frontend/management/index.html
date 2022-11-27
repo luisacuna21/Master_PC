@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/output.css" />
+  </head>
+  <body>
+    <nav
+      class="relative w-full flex items-center py-3 bg-blue-300 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg"
+    >
+      <div class="container-fluid w-full flex items-center justify-center px-6">
+        <div class="container-fluid">
+          <a class="text-xl text-black font-semibold" href="#">Master PC</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex h-screen">
+      <aside
+        id="asideMenu"
+        class="h-full bg-gray-600 w-16"
+        aria-label="Sidebar"
+      >
+        <div class="py-4 px-3">
+          <div class="flex justify-end mb-5">
+            <button
+              id="showMenuBtn"
+              class="bg-transparent rounded-md px-2 py-2 -mr-1 hover:bg-blue-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                style="fill: rgba(147, 197, 253, 1)"
+              >
+                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <ul class="space-y-2">
+            <li>
+              <button
+                id="homeMenuBtn"
+                class="flex items-center p-2 text-base font-semibold text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                </svg>
+                <span id="homeMenuBtnSpan" class="ml-3 hidden">Inicio</span>
+              </button>
+            </li>
+            <li>
+              <button
+                id="productsMenuBtn"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  class="dark:text-gray-400"
+                  viewBox="0 0 24 24"
+                  style="fill: rgb(156 163 175)"
+                >
+                  <path
+                    d="M20 17.722c.595-.347 1-.985 1-1.722V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v11c0 .736.405 1.375 1 1.722V18H2v2h20v-2h-2v-.278zM5 16V5h14l.002 11H5z"
+                  ></path>
+                </svg>
+                <span
+                  id="productsMenuBtnSpan"
+                  class="flex-1 ml-3 whitespace-nowrap hidden"
+                  >Productos</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="usersMenuBtn"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span
+                  id="usersMenuBtnSpan"
+                  class="flex-1 ml-3 whitespace-nowrap hidden"
+                  >Usuarios</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="customersMenuBtn"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  style="fill: rgba(156, 163, 175, 1)"
+                >
+                  <circle cx="12" cy="4" r="2"></circle>
+                  <path
+                    d="M15 7H9a1 1 0 0 0-1 1v7h2v7h4v-7h2V8a1 1 0 0 0-1-1z"
+                  ></path>
+                </svg>
+                <span
+                  id="customersMenuBtnSpan"
+                  class="flex-1 ml-3 whitespace-nowrap hidden"
+                  >Clientes</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="employeesMenuBtn"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  style="fill: rgba(156, 163, 175, 1)"
+                >
+                  <path
+                    d="M20.5 5A1.5 1.5 0 0 0 19 6.5V11h-1V4.5a1.5 1.5 0 0 0-3 0V11h-1V3.5a1.5 1.5 0 0 0-3 0V11h-1V5.5a1.5 1.5 0 0 0-3 0v10.81l-2.22-3.6a1.5 1.5 0 0 0-2.56 1.58l3.31 5.34A5 5 0 0 0 9.78 22H17a5 5 0 0 0 5-5V6.5A1.5 1.5 0 0 0 20.5 5z"
+                  ></path>
+                </svg>
+                <span
+                  id="employeesMenuBtnSpan"
+                  class="flex-1 ml-3 whitespace-nowrap hidden"
+                  >Empleados</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="ordersMenuBtn"
+                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span
+                  id="ordersMenuBtnSpan"
+                  class="flex-1 ml-3 whitespace-nowrap hidden"
+                  >Órdenes</span
+                >
+              </button>
+              <button
+                id="logoutBtn"
+                class="items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hidden"
+              >
+                Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="w-full overflow-auto">
+        <main id="mainDiv" class="h-full w-full">
+          <div id="homeDiv" class="justify-center items-center p-2 m-0">
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">Inicio</h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+          </div>
+
+          <!-- Products -->
+          <div
+            id="productsDiv"
+            class="justify-center items-center p-2 m-0 hidden"
+          >
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">
+                Productos
+              </h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+
+            <div class="flex flex-row-reverse m-5">
+              <button
+                class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Agregar
+              </button>
+            </div>
+
+            <div class="flex flex-col">
+              <div class="overflow-x-auto">
+                <div class="inline-block min-w-full">
+                  <div class="">
+                    <table
+                      class="table-fixed min-w-full text-center hover:bg-red-700"
+                    >
+                      <thead class="border-b bg-gray-800">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-white px-4 py-4 hidden"
+                          >
+                            ProductId
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1 max-w-md"
+                          >
+                            Nombre
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Marca
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Categoría
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Precio
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Stock
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            En camino
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Punto de reorden
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Estado
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="productsTableBody">
+                        <!-- <tr class="bg-white border-b">
+                          <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900 text-wrap whitespace-nowrap"
+                          >
+                            eifuvheofiuvhieuofhvouiehvuiermmmmmmmmmmmmmmmmmmmmmmmmm
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Mark
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Ottoddddddddddddddddddd
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            @mdo
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            @mdoff
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            @mdoff
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            @mdoff
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Disponible
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Users -->
+          <div id="usersDiv" class="justify-center items-center p-2 m-0 hidden">
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">Usuarios</h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+
+            <div class="flex flex-row-reverse m-5">
+              <button
+                class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Agregar
+              </button>
+            </div>
+
+            <div class="flex flex-col">
+              <div class="overflow-x-auto">
+                <div class="inline-block min-w-full">
+                  <div class="">
+                    <table
+                      class="table-fixed min-w-full text-center hover:bg-red-700"
+                    >
+                      <thead class="border-b bg-gray-800">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-white px-4 py-4 hidden"
+                          >
+                            UserId
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1 max-w-md"
+                          >
+                            Nombre de suario
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Es empleado
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="usersTableBody">
+                        <!-- <tr class="bg-white border-b">
+                          <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900 text-wrap whitespace-nowrap"
+                          >
+                            eifuvheofiuvhieuofhvouiehvuiermmmmmmmmmmmmmmmmmmmmmmmmm
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Mark
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Ottoddddddddddddddddddd
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customers -->
+          <div
+            id="customersDiv"
+            class="justify-center items-center p-2 m-0 hidden"
+          >
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">Clientes</h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+
+            <!-- <div class="flex flex-row-reverse m-5">
+              <button
+                class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Agregar
+              </button>
+            </div> -->
+
+            <div class="flex flex-col mt-5">
+              <div class="overflow-x-auto">
+                <div class="inline-block min-w-full">
+                  <div class="">
+                    <table
+                      class="table-fixed min-w-full text-center hover:bg-red-700"
+                    >
+                      <thead id="productsDiv" class="border-b bg-gray-800">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-white px-4 py-4 hidden"
+                          >
+                            CustomerId
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1 max-w-md"
+                          >
+                            Nombre
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Nombre de usuario
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Email
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            City
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Código postal
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            País
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Teléfono
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="customersTableBody">
+                        <!-- <tr class="bg-white border-b">
+                          <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900 text-wrap whitespace-nowrap"
+                          >
+                            eifuvheofiuvhieuofhvouiehvuiermmmmmmmmmmmmmmmmmmmmmmmmm
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Mark
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Ottoddddddddddddddddddd
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Employees -->
+          <div
+            id="employeesDiv"
+            class="justify-center items-center p-2 m-0 hidden"
+          >
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">
+                Empleados
+              </h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+
+            <div class="flex flex-row-reverse m-5">
+              <button
+                class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Agregar
+              </button>
+            </div>
+
+            <div class="flex flex-col mt-5">
+              <div class="overflow-x-auto">
+                <div class="inline-block min-w-full">
+                  <div class="">
+                    <table
+                      class="table-fixed min-w-full text-center hover:bg-red-700"
+                    >
+                      <thead id="productsDiv" class="border-b bg-gray-800">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-white px-4 py-4 hidden"
+                          >
+                            EmployeeId
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1 max-w-md"
+                          >
+                            Nombre
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Nombre de usuario
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Identificación
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Contratación
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Dirección
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Ciudad
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Teléfono
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Email
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="employeesTableBody">
+                        <!-- <tr class="bg-white border-b">
+                          <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900 text-wrap whitespace-nowrap"
+                          >
+                            eifuvheofiuvhieuofhvouiehvuiermmmmmmmmmmmmmmmmmmmmmmmmm
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Mark
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Ottoddddddddddddddddddd
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orders -->
+          <div
+            id="ordersDiv"
+            class="justify-center items-center p-2 m-0 hidden"
+          >
+            <div class="w-full">
+              <h1 class="text-3xl font-medium tracking-wider pb-2">Órdenes</h1>
+              <hr class="border-t-2 border-t-blue-900" />
+            </div>
+
+            <!-- <div class="flex flex-row-reverse m-5">
+              <button
+                class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Agregar
+              </button>
+            </div> -->
+
+            <div class="flex flex-col mt-5">
+              <div class="overflow-x-auto">
+                <div class="inline-block min-w-full">
+                  <div class="">
+                    <table
+                      class="table-fixed min-w-full text-center hover:bg-red-700"
+                    >
+                      <thead id="productsDiv" class="border-b bg-gray-800">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-white px-4 py-4"
+                          >
+                            OrderId
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1 max-w-md"
+                          >
+                            Código de cliente
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Fecha de pedido
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Envío por
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Dirección de envío
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Ciudad
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            Código postal
+                          </th>
+                          <th
+                            scope="col"
+                            class="text-md font-medium text-white px-6 py-1"
+                          >
+                            País
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="ordersTableBody">
+                        <!-- <tr class="bg-white border-b">
+                          <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900 text-wrap whitespace-nowrap"
+                          >
+                            eifuvheofiuvhieuofhvouiehvuiermmmmmmmmmmmmmmmmmmmmmmmmm
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Mark
+                          </td>
+                          <td
+                            class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                          >
+                            Ottoddddddddddddddddddd
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="../js/employeeIndex.js"></script>
+    <!-- <script type="module" src="../js/modules/APIConnection.js"></script> -->
+  </body>
+</html>

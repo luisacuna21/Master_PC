@@ -50,7 +50,13 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<IEnumerable<Customer>> GetAll()
     {
-        return await _context.Customers.ToListAsync();
+        var customers = await _context.Customers.ToListAsync();
+
+        foreach (var c in customers)
+        {
+            c.User = await _context.Users.Where(u => u.UserId == c.UserId).FirstAsync();
+        }
+        return customers;
     }
 
     public async Task<Customer> GetById(int id)

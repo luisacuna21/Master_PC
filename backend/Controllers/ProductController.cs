@@ -10,7 +10,7 @@ using backend.Models.Repository;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -22,30 +22,19 @@ namespace backend.Controllers
         }
 
         // GET: api/Product
-        // [HttpGet]
-        // public async Task<IEnumerable<Product>> GetProducts()
-        // {
-        //     return await _productRepository.GetAll();
-        // }
-
-        [Route("verify")]
-        [HttpGet("{allPhotos}")]
-        public async Task<IEnumerable<Product>> GetProducts(bool allPhotos)
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetProducts()
         {
-            if (allPhotos)
-                return await _productRepository.GetAll();
-            else
-                return await _productRepository.GetAllWithAllPhotos();
+            return await _productRepository.GetAll();
         }
 
-        // // GET: api/Product/5
-        // [HttpGet("{allPhotos}")]
-        // public async Task<ActionResult<Product>> GetProduct(bool allPhotos)
+        // [Route("products")]
+        // [HttpGet("api/Product/{allPhotos}")]
+        // [Route("firstPhoto")]
+        // [HttpGet]
+        // public async Task<IEnumerable<Product>> GetProductsWhitOnlyOnePhoto()
         // {
-        //     var product = await _productRepository.GetById(id);
-        //     if (product is null)
-        //         return NotFound();
-        //     return product;
+        //     return await _productRepository.GetAll();
         // }
 
         // GET: api/Product/5

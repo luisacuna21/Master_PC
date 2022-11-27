@@ -1,12 +1,12 @@
-USE master
-GO
+--USE master
+--GO
 
-IF EXISTS (SELECT * FROM sysdatabases WHERE NAME='MasterPC')
-		DROP DATABASE MasterPC
-GO
+--IF EXISTS (SELECT * FROM sysdatabases WHERE NAME='MasterPC')
+--		DROP DATABASE MasterPC
+--GO
 
-CREATE DATABASE MasterPC
-GO
+--CREATE DATABASE MasterPC
+--GO
 
 USE MasterPC
 GO
@@ -103,20 +103,19 @@ CREATE TABLE Inventory.ProductCategories
 CREATE TABLE Inventory.Products (
 	ProductID int PRIMARY KEY IDENTITY (1, 1),
 	ProductName varchar (250) NOT NULL ,
+	ProductShortName varchar(100) NULL,
 	BrandID int FOREIGN KEY REFERENCES Inventory.Brands (BrandID) NOT NULL,
 	--SupplierID int NULL ,
 	CategoryID int FOREIGN KEY REFERENCES Inventory.ProductCategories (ProductCategoryID) NOT NULL ,
-	--QuantityPerUnit varchar (20) NULL ,
 	UnitPrice decimal(8,2) NULL CONSTRAINT DF_Products_UnitPrice DEFAULT (0),
 	UnitsInStock smallint NULL CONSTRAINT DF_Products_UnitsInStock DEFAULT (0),
 	UnitsOnOrder smallint NULL CONSTRAINT DF_Products_UnitsOnOrder DEFAULT (0),
 	ReorderLevel smallint NULL CONSTRAINT DF_Products_ReorderLevel DEFAULT (0),
 	Discontinued bit NOT NULL CONSTRAINT DF_Products_Discontinued DEFAULT (0),
 	ProductDescription varchar(500) NULL
-	--Photo varbinary(max) NULL
 )
 GO
---ALTER TABLE Inventory.Products ADD ProductDescription varchar(250) NULL
+--ALTER TABLE Inventory.Products ADD ProductShortName varchar(100) NULL
 --GO
 
 --ALTER TABLE Inventory.Products ALTER COLUMN ProductName varchar(250) NOT NULL
@@ -130,10 +129,13 @@ GO
 CREATE TABLE Inventory.ProductPhotos (
 	ProductPhotoID int PRIMARY KEY IDENTITY (1,1),
 	ProductID int FOREIGN KEY REFERENCES Inventory.Products (ProductID) NOT NULL,
-	Photo varbinary(max) NOT NULL,
+	Photo varbinary(max) NULL,
+	PhotoBase64 nvarchar(max) NULL
 	--Extension varchar(10) NOT NULL
 )
-GO 
+GO
+--ALTER TABLE Inventory.ProductPhotos ADD PhotoBase64 nvarchar(max) NULL
+--GO
 
 CREATE SCHEMA Sale;
 GO

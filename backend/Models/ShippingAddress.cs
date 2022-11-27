@@ -14,6 +14,6 @@ namespace backend.Models
         public string Country { get; set; }
         public string Phone { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public Customer Customer { get; set; }
     }
 }

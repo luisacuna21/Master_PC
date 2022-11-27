@@ -506,11 +506,11 @@
               >
                 <p
                   id="accountDropdownLabel"
-                  class="text-gray-500 group inline-flex items-center text-base font-semibold"
+                  class="text-gray-200 group inline-flex items-center text-base font-semibold"
                 ></p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-white"
+                  class="h-5 w-5 text-gray-200"
                 >
                   <path
                     d="M12,7a2,2,0,1,0-2-2A2,2,0,0,0,12,7Zm0,10a2,2,0,1,0,2,2A2,2,0,0,0,12,17Zm0-7a2,2,0,1,0,2,2A2,2,0,0,0,12,10Z"
@@ -559,12 +559,12 @@
                   </li>
                 </ul>
                 <div class="py-1">
-                  <a
+                  <button
                     id="logoutLink"
-                    href="index.html"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-600 hover:text-white"
-                    >Cerrar sesión</a
+                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-600 hover:text-white w-full text-left"
                   >
+                    Cerrar sesión
+                  </button>
                 </div>
               </div>
             </div>
@@ -849,6 +849,10 @@
       </aside>
 
       <main class="container w-screen m-0">
+        <div id="loadingDiv" class="w-full bg-gray-200 h-1 mt-0">
+          <div class="bg-blue-600 h-1 ml-96" style="width: 20%"></div>
+        </div>
+
         <div class="flex bg-white m-0 items-center">
           <div class="p-1 sm:p-5 lg:px-8">
             <h2
@@ -861,386 +865,59 @@
               id="productsDiv"
               class="container p-1 sm:p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1"
+              <!-- <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1"
               >
-                <div class="flex items-center sm:h-56">
+                <div class="flex items-center sm:h-56 group-hover:opacity-75">
                   <img
                     src="images/mostSelledProducts/Alienware M15 R2.jpg"
                     class="object-fill"
                     alt="producto.jpg"
                   />
                 </div>
-                <div class="mt-1 flex justify-between p-2">
+                <div class="mt-0 flex flex-wrap justify-between p-1">
                   <div>
                     <h3 class="text-sm text-gray-700">
+                      <label for="productId"></label>
                       <a href="#">
                         <span
                           aria-hidden="true"
                           class="absolute inset-0"
                         ></span>
-                        Basic tee
+                        <p class="text-justify">
+                          ROG Zephyrus G15, 15.6”, 165Hz QHD, GeForce RTX 3080,
+                          AMD Ryzen 9 5900HS, 16GB DDR4, 1TB SSD
+                        </p>
                       </a>
                     </h3>
                     <p class="mt-1 text-sm text-gray-900">Gray</p>
                   </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
+                  <p class="text-md font-medium text-gray-900 mt-1">USD 1500</p>
                 </div>
-              </div>
+              </div> -->
 
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1"
-              >
-                <div class="flex items-center sm:h-56">
-                  <img
-                    src="images/mostSelledProducts/Asus L410.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
+              <!-- <div class="group relative">
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </div>
-                <div class="mt-1 flex justify-between p-2">
+                <div class="mt-4 flex justify-between">
                   <div>
                     <h3 class="text-sm text-gray-700">
                       <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
+                        <span aria-hidden="true" class="absolute inset-0"></span>
+                        Basic Tee
                       </a>
                     </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
-                  </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-              </div>
-
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1"
-              >
-                <div class="flex items-center sm:h-56">
-                  <img
-                    src="images/mostSelledProducts/Hp spectre 360.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
-                </div>
-                <div class="mt-1 flex justify-between p-2">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
-                  </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-              </div>
-
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1"
-              >
-                <div class="flex items-center sm:h-56">
-                  <img
-                    src="images/mostSelledProducts/matebook-x-huawei.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
-                </div>
-                <div class="mt-1 flex justify-between p-2">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
-                  </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-              </div>
-
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1"
-              >
-                <div class="flex items-center sm:h-56">
-                  <img
-                    src="images/mostSelledProducts/MSI 2021.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
-                </div>
-                <div class="mt-1 flex justify-between p-2">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
-                  </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-              </div>
-
-              <!-- <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1 h-full"
-              >
-                <div class="flex items-center h-96">
-                  <img
-                    src="images/mostSelledProducts/Asus L410.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
-                </div>
-                <div class="mt-1 flex justify-between p-2">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
-                  </div>
-                  <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-              </div>
-
-              <div
-                class="container relative rounded-lg shadow-sm shadow-gray-400 p-1 h-full"
-              >
-                <div class="flex items-center">
-                  <img
-                    src="images/mostSelledProducts/Hp spectre 360.jpg"
-                    class="object-fill"
-                    alt="producto.jpg"
-                  />
-                </div>
-                <div class="mt-1 flex justify-between p-2">
-                  <div>
-                    <h3 class="text-sm text-gray-700">
-                      <a href="#">
-                        <span
-                          aria-hidden="true"
-                          class="absolute inset-0"
-                        ></span>
-                        Basic tee
-                      </a>
-                    </h3>
-                    <p class="mt-1 text-sm text-gray-900">Gray</p>
+                    <p class="mt-1 text-sm text-gray-500">Black</p>
                   </div>
                   <p class="text-sm font-medium text-gray-900">$35</p>
                 </div>
               </div> -->
+
               <!-- More products... -->
             </div>
           </div>
         </div>
-
-        <!-- <div
-          class="collapse md:grid md:grid-cols-2 md:gap-6 bg-black w-full h-full p-2 pt-5 pb-5"
-        >
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg"
-            >
-              <img
-                class="w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                alt=""
-              />
-              <div class="p-6 flex flex-col justify-start">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Card title
-                </h5>
-                <p class="text-gray-700 text-base mb-4">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </main>
     </div>
 

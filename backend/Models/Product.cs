@@ -8,8 +8,8 @@ namespace backend.Models
     {
         public Product()
         {
-            OrderDetails = new HashSet<OrderDetail>();
-            ProductPhotos = new HashSet<ProductPhoto>();
+            Brand = new Brand();
+            Category = new ProductCategory();
         }
 
         public int ProductId { get; set; }
@@ -24,11 +24,16 @@ namespace backend.Models
         public string ProductDescription { get; set; }
 
         [NotMapped]
+        public Brand Brand { get; set; }
+        [NotMapped]
+        public string ProductShortName { get; set; }
+        [NotMapped]
+        public ProductCategory Category { get; set; }
+        [NotMapped]
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        [NotMapped]
+        public IEnumerable<ProductPhoto> ProductPhotos { get; set; }
+        [NotMapped]
         public ProductPhoto FirstPhoto { get; set; }
-
-        public virtual Brand Brand { get; set; }
-        public virtual ProductCategory Category { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }

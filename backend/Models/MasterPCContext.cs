@@ -83,10 +83,10 @@ namespace backend.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.User)
-                    .WithOne(p => p.Customer)
-                    .HasForeignKey<Customer>(d => d.UserId)
-                    .HasConstraintName("FK__Customers__UserI__68487DD7");
+                // entity.HasOne(d => d.User)
+                //     .WithOne(p => p.Customer)
+                //     .HasForeignKey<Customer>(d => d.UserId)
+                //     .HasConstraintName("FK__Customers__UserI__68487DD7");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -136,10 +136,10 @@ namespace backend.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.User)
-                    .WithOne(p => p.Employee)
-                    .HasForeignKey<Employee>(d => d.UserId)
-                    .HasConstraintName("FK__Employees__UserI__6477ECF3");
+                // entity.HasOne(d => d.User)
+                //     .WithOne(p => p.Employee)
+                //     .HasForeignKey<Employee>(d => d.UserId)
+                //     .HasConstraintName("FK__Employees__UserI__6477ECF3");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -214,11 +214,11 @@ namespace backend.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderDeta__Order__01142BA1");
 
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Produ__02084FDA");
+                // entity.HasOne(d => d.Product)
+                //     .WithMany(p => p.OrderDetails)
+                //     .HasForeignKey(d => d.ProductId)
+                //     .OnDelete(DeleteBehavior.ClientSetNull)
+                //     .HasConstraintName("FK__OrderDeta__Produ__02084FDA");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -241,6 +241,10 @@ namespace backend.Models
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ProductShortName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.UnitPrice)
@@ -251,17 +255,17 @@ namespace backend.Models
 
                 entity.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
 
-                entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.BrandId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__BrandI__73BA3083");
+                // entity.HasOne(d => d.Brand)
+                //     .WithMany(p => p.Products)
+                //     .HasForeignKey(d => d.BrandId)
+                //     .OnDelete(DeleteBehavior.ClientSetNull)
+                //     .HasConstraintName("FK__Products__BrandI__73BA3083");
 
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__Catego__74AE54BC");
+                // entity.HasOne(d => d.Category)
+                //     .WithMany(p => p.Products)
+                //     .HasForeignKey(d => d.CategoryId)
+                //     .OnDelete(DeleteBehavior.ClientSetNull)
+                //     .HasConstraintName("FK__Products__Catego__74AE54BC");
             });
 
             modelBuilder.Entity<ProductCategory>(entity =>
@@ -282,9 +286,11 @@ namespace backend.Models
 
                 entity.Property(e => e.ProductPhotoId).HasColumnName("ProductPhotoID");
 
-                entity.Property(e => e.Photo).IsRequired();
+                // entity.Property(e => e.Photo).IsRequired();
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.PhotoBase64).HasColumnName("PhotoBase64");
 
                 // entity.HasOne(d => d.Product)
                 //     .WithMany(p => p.ProductPhotos)

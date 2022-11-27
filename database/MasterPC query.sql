@@ -1,12 +1,12 @@
-USE master
-GO
+--USE master
+--GO
 
-IF EXISTS (SELECT * FROM sysdatabases WHERE NAME='MasterPC')
-		DROP DATABASE MasterPC
-GO
+--IF EXISTS (SELECT * FROM sysdatabases WHERE NAME='MasterPC')
+--		DROP DATABASE MasterPC
+--GO
 
-CREATE DATABASE MasterPC
-GO
+--CREATE DATABASE MasterPC
+--GO
 
 USE MasterPC
 GO

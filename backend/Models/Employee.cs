@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
@@ -17,6 +18,6 @@ namespace backend.Models
         public string Email { get; set; }
         public int? UserId { get; set; }
 
-        public virtual User User { get; set; }
+        public User User { get; set; }
     }
 }

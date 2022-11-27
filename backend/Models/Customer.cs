@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
@@ -7,8 +8,7 @@ namespace backend.Models
     {
         public Customer()
         {
-            Orders = new HashSet<Order>();
-            ShippingAddresses = new HashSet<ShippingAddress>();
+            User = new();
         }
 
         public int CustomerId { get; set; }
@@ -20,8 +20,12 @@ namespace backend.Models
         public string Phone { get; set; }
         public int? UserId { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<ShippingAddress> ShippingAddresses { get; set; }
+
+        [NotMapped]
+        public User User { get; set; }
+        [NotMapped]
+        public IEnumerable<Order> Orders { get; set; }
+        [NotMapped]
+        public IEnumerable<ShippingAddress> ShippingAddresses { get; set; }
     }
 }
