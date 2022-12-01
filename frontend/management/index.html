@@ -194,18 +194,185 @@
 
       <div class="w-full overflow-auto">
         <main id="mainDiv" class="h-full w-full">
+          <!-- Home -->
           <div id="homeDiv" class="justify-center items-center p-2 m-0">
             <div class="w-full">
               <h1 class="text-3xl font-medium tracking-wider pb-2">Inicio</h1>
               <hr class="border-t-2 border-t-blue-900" />
             </div>
+
+            <div
+              class="container p-1 sm:p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4"
+            >
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1 sm:col-span-2"
+              >
+                <div class="flex flex-wrap p-1 sm:h-28">
+                  <div class="container">
+                    <h3
+                      class="text-xl text-gray-800 font-bold tracking-wider text-start"
+                    >
+                      Ingresos totales
+                    </h3>
+                    <div class="flex gap-1 justify-center mt-2">
+                      <p
+                        id="totalIncomeParagraph"
+                        class="text-3xl font-medium text-gray-600 text-center"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1"
+              >
+                <div class="flex flex-wrap p-1 sm:h-28">
+                  <div class="container">
+                    <h3
+                      class="text-xl text-gray-800 font-bold tracking-wider text-start"
+                    >
+                      Órdenes totales
+                    </h3>
+                    <div class="flex gap-1 justify-center mt-2">
+                      <p
+                        id="totalOrdersParagraph"
+                        class="text-3xl font-medium text-gray-600 text-center"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1"
+              >
+                <div class="flex flex-wrap p-1 sm:h-28">
+                  <div class="container">
+                    <h3
+                      class="text-xl text-gray-800 font-bold tracking-wider text-start"
+                    >
+                      Productos registrados
+                    </h3>
+                    <div class="flex gap-1 justify-center mt-2">
+                      <p
+                        id="registeredProductsParagraph"
+                        class="text-3xl font-medium text-gray-600 text-center"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1"
+              >
+                <div class="flex flex-wrap p-1 sm:h-28">
+                  <div class="container">
+                    <h3
+                      class="text-xl text-gray-800 font-bold tracking-wider text-start"
+                    >
+                      Clientes registrados
+                    </h3>
+                    <div class="flex gap-1 justify-center mt-2">
+                      <p
+                        id="registeredClientsParagraph"
+                        class="text-3xl font-medium text-gray-600 text-center"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1"
+              >
+                <div class="flex flex-wrap p-1 sm:h-28">
+                  <div class="container">
+                    <h3
+                      class="text-xl text-gray-800 font-bold tracking-wider text-start"
+                    >
+                      Productos promedio por orden
+                    </h3>
+                    <div class="flex gap-1 justify-center mt-1">
+                      <p
+                        id="productsPerOrderAverageParagraph"
+                        class="text-3xl font-medium text-gray-600 text-center"
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1 sm:col-span-2 md:col-span-3"
+              >
+                <div class="flex w-full flex-wrap p-1">
+                  <div class="flex flex-col w-full">
+                    <div class="overflow-x-auto">
+                      <div class="py-2 inline-block w-full">
+                        <div class="overflow-hidden">
+                          <table class="min-w-full">
+                            <thead class="bg-gray-200 border-b">
+                              <tr>
+                                <th
+                                  scope="col"
+                                  class="text-sm font-medium text-gray-900 px-4 py-2 text-center"
+                                >
+                                  Código de producto
+                                </th>
+                                <th
+                                  scope="col"
+                                  class="text-sm font-medium text-gray-900 px-4 py-2 text-center"
+                                >
+                                  Nombre
+                                </th>
+                                <th
+                                  scope="col"
+                                  class="text-sm font-medium text-gray-900 px-4 py-2 text-center"
+                                >
+                                  Categoría
+                                </th>
+                                <th
+                                  scope="col"
+                                  class="text-sm font-medium text-gray-900 px-4 py-2 text-center"
+                                >
+                                  Marca
+                                </th>
+                                <th
+                                  scope="col"
+                                  class="text-sm font-medium text-gray-900 px-4 py-2 text-center"
+                                >
+                                  Cantidad
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody id="bestSellersTableBody">
+                              <!-- <tr class="bg-white border-b text-center">
+                                <td class="px-4 py-3 text-sm text-gray-900 font-light whitespace-nowrap">1</td>
+                                <td class="px-4 py-3 text-sm text-gray-900 font-light whitespace-nowrap">
+                                  Mark
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-900 font-light whitespace-nowrap">
+                                  Otto
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-900 font-light whitespace-nowrap">
+                                  @mdo
+                                </td>
+                              </tr> -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Products -->
-          <div
-            id="productsDiv"
-            class="justify-center items-center p-2 m-0 hidden"
-          >
+          <div id="productsDiv" class="justify-center items-center p-2 m-0">
             <div class="w-full">
               <h1 class="text-3xl font-medium tracking-wider pb-2">
                 Productos
@@ -213,15 +380,22 @@
               <hr class="border-t-2 border-t-blue-900" />
             </div>
 
-            <div class="flex flex-row-reverse m-5">
+            <div class="flex flex-row-reverse m-5 gap-1">
               <button
+                id="showAddProductBtn"
                 class="bg-blue-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
               >
                 Agregar
               </button>
+              <!-- <button
+                id="cancelAddProductBtn"
+                class="bg-red-600 rounded-lg px-4 py-2 font-medium text-gray-200 hover:bg-blue-300 hover:text-gray-800"
+              >
+                Cancelar
+              </button> -->
             </div>
 
-            <div class="flex flex-col">
+            <div class="flex-col" id="productsTableDiv">
               <div class="overflow-x-auto">
                 <div class="inline-block min-w-full">
                   <div class="">
@@ -331,6 +505,201 @@
                         </tr> -->
                       </tbody>
                     </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="modal hidden fade w-full h-full outline-none overflow-x-hidden overflow-y-auto sm:p-10"
+              id="addProductModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLgLabel"
+              aria-modal="true"
+              role="dialog"
+            >
+              <div
+                class="modal-dialog modal-lg relative w-auto pointer-events-none"
+              >
+                <div
+                  class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-gray-200 bg-clip-padding rounded-md outline-none text-current"
+                >
+                  <div
+                    class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-700 rounded-t-md"
+                  >
+                    <h5
+                      class="text-xl font-medium leading-normal text-gray-800"
+                      id="exampleModalLgLabel"
+                    >
+                      Agregar producto
+                    </h5>
+                  </div>
+
+                  <div class="modal-body relative p-4">
+                    <div class="mt-10 sm:mt-0">
+                      <div class="mt-5 md:mt-0">
+                        <form action="#" method="POST">
+                          <div class="overflow-hidden shadow sm:rounded-md">
+                            <div class="bg-white px-4 py-5 sm:p-6">
+                              <div
+                                class="grid grid-cols-1 sm:grid-cols-4 gap-4"
+                              >
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="product-name"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Nombre del producto</label
+                                  >
+                                  <input
+                                    type="text"
+                                    name="product-name"
+                                    id="productNameInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="product-name"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Nombre corto del producto</label
+                                  >
+                                  <input
+                                    type="text"
+                                    name="product-name"
+                                    id="productShortNameInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="brandId"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Marca</label
+                                  >
+                                  <input
+                                    type="text"
+                                    name="brand"
+                                    id="productBrandInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="cateoryId"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Categoría</label
+                                  >
+                                  <input
+                                    type="text"
+                                    name="category"
+                                    id="productCategoryInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="unitPrice"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Precio unitario</label
+                                  >
+                                  <input
+                                    type="number"
+                                    name="unit-price"
+                                    id="unitPriceInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <!-- Units in Stock = 0 -->
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="street-address"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Unidades pedidas</label
+                                  >
+                                  <input
+                                    type="number"
+                                    name="units-on-order"
+                                    id="unitsOnOrderInput"
+                                    autocomplete="street-address"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="city"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Punto de reorden</label
+                                  >
+                                  <input
+                                    type="number"
+                                    name="units-on-order"
+                                    id="reorderLevelInput"
+                                    autocomplete="street-address"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <!-- Discontinued == false -->
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="region"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Descripción</label
+                                  >
+                                  <input
+                                    type="text"
+                                    name="region"
+                                    id="productDescriptionInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+
+                                <div class="col-span-1 sm:col-span-2">
+                                  <label
+                                    for="postal-code"
+                                    class="block text-sm font-medium text-gray-700"
+                                  >
+                                    Imágenes
+                                  </label>
+                                  <input
+                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    type="file"
+                                    id="productPhotosInput"
+                                    multiple
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="bg-gray-50 px-4 py-3 text-right sm:px-6"
+                            >
+                              <button
+                                type="button"
+                                id="saveProductButton"
+                                class="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              >
+                                Save
+                              </button>
+                              <button
+                                id="cancelAddProductButton"
+                                type="button"
+                                class="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              >
+                                Cancelar
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

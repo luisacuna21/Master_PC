@@ -112,7 +112,7 @@ CREATE TABLE Inventory.Products (
 	UnitsOnOrder smallint NULL CONSTRAINT DF_Products_UnitsOnOrder DEFAULT (0),
 	ReorderLevel smallint NULL CONSTRAINT DF_Products_ReorderLevel DEFAULT (0),
 	Discontinued bit NOT NULL CONSTRAINT DF_Products_Discontinued DEFAULT (0),
-	ProductDescription varchar(500) NULL
+	ProductDescription varchar(1000) NULL
 )
 GO
 --ALTER TABLE Inventory.Products ADD ProductShortName varchar(100) NULL
@@ -121,7 +121,7 @@ GO
 --ALTER TABLE Inventory.Products ALTER COLUMN ProductName varchar(250) NOT NULL
 --GO
 
---ALTER TABLE Inventory.Products ALTER COLUMN ProductDescription varchar(500) NOT NULL
+--ALTER TABLE Inventory.Products ALTER COLUMN ProductDescription varchar(1000) NULL
 --GO
 
 

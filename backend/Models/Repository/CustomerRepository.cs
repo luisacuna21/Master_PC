@@ -50,7 +50,7 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<IEnumerable<Customer>> GetAll()
     {
-        var customers = await _context.Customers.ToListAsync();
+        var customers = await _context.Customers.Take(100).ToListAsync();
 
         foreach (var c in customers)
         {

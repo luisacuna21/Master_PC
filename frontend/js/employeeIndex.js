@@ -1,9 +1,13 @@
-import { getProducts } from "./modules/APIConnection.js";
-import { getProductById } from "./modules/APIConnection.js";
+import {
+  addProduct,
+  getProducts,
+  getProductById,
+  getCustomers,
+  getUsers,
+  getHome,
+} from "./modules/APIConnection.js";
 
-import { getUsers } from "./modules/APIConnection.js";
-
-import { getCustomers } from "./modules/APIConnection.js";
+import { Product } from "./modules/Classes.js";
 
 // const productURL = "https://localhost:7138/api/products";
 
@@ -34,9 +38,39 @@ const ordersMenuBtnSpan = document.querySelector("#ordersMenuBtnSpan");
 // Views
 
 const homeDiv = document.querySelector("#homeDiv");
+const totalIncomeParagraph = document.querySelector("#totalIncomeParagraph");
+const totalOrdersParagraph = document.querySelector("#totalOrdersParagraph");
+const registeredProductsParagraph = document.querySelector(
+  "#registeredProductsParagraph"
+);
+const registeredClientsParagraph = document.querySelector(
+  "#registeredClientsParagraph"
+);
+const productsPerOrderAverageParagraph = document.querySelector(
+  "#productsPerOrderAverageParagraph"
+);
+const bestSellersTableBody = document.querySelector("#bestSellersTableBody");
 
 const productsDiv = document.querySelector("#productsDiv");
+const productsTableDiv = document.querySelector("#productsTableDiv");
 const productsTableBody = document.querySelector("#productsTableBody");
+const showAddProductBtn = document.querySelector("#showAddProductBtn");
+const addProductModal = document.querySelector("#addProductModal");
+const productNameInput = document.querySelector("#productNameInput");
+const productShortNameInput = document.querySelector("#productShortNameInput");
+const productBrandInput = document.querySelector("#productBrandInput");
+const productCategoryInput = document.querySelector("#productCategoryInput");
+const unitPriceInput = document.querySelector("#unitPriceInput");
+const unitsOnOrderInput = document.querySelector("#unitsOnOrderInput");
+const reorderLevelInput = document.querySelector("#reorderLevelInput");
+const productDescriptionInput = document.querySelector(
+  "#productDescriptionInput"
+);
+const productPhotosInput = document.querySelector("#productPhotosInput");
+const saveProductButton = document.querySelector("#saveProductButton");
+const cancelAddProductButton = document.querySelector(
+  "#cancelAddProductButton"
+);
 
 const usersDiv = document.querySelector("#usersDiv");
 const usersTableBody = document.querySelector("#usersTableBody");
@@ -61,7 +95,6 @@ logoutBtn.addEventListener("click", () => {
   // Hide user info
   window.location.href = "../index.html";
 });
-
 
 // Menu buttons event listeners
 
@@ -143,38 +176,80 @@ ordersMenuBtn.addEventListener("click", function () {
 
 // Load Data
 
+function showBestSellersInTable(bestSellers) {
+  let template = "";
+  bestSellers.forEach((bestSeller) => {
+    template += `
+            <tr class="bg-white border-b text-center">
+                <td class="px-4 py-3 text-sm text-gray-900 font-regular whitespace-nowrap">
+                  ${bestSeller.product.productId}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-900 font-regular whitespace-nowrap">
+                  ${bestSeller.product.productShortName}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-900 font-regular whitespace-nowrap">
+                  ${bestSeller.product.category.categoryName}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-900 font-regular whitespace-nowrap">
+                  ${bestSeller.product.brand.brandName}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-900 font-regular whitespace-nowrap">
+                  ${bestSeller.quantity}
+                </td>
+            </tr>
+        `;
+  });
+  bestSellersTableBody.innerHTML += template;
+}
+
+function showHome(home) {
+  totalIncomeParagraph.textContent = home.incomeStringFormat;
+  totalOrdersParagraph.textContent = home.ordersCount;
+  registeredProductsParagraph.textContent = home.productsCount;
+  registeredClientsParagraph.textContent = home.customersCount;
+  productsPerOrderAverageParagraph.textContent = home.productsPerOrderAverage;
+  showBestSellersInTable(home.bestSellers);
+}
+
+async function loadAndShowHome() {
+  const homeResponse = await getHome();
+  const home = await homeResponse.json();
+  console.log(home);
+  showHome(home);
+}
+
 function showProductsInTable(products) {
   let template = "";
   products.forEach((p) => {
     template += `<tr class="bg-white border-b hover:bg-blue-200">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden">
-                          ${p.productId}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-start">
-                          ${p.productShortName}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      ${p.brand.brandName}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.category.categoryName}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.unitPrice}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.unitsInStock}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.unitsOnOrder}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.reorderLevel}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          ${p.discontinued}
-                          </td>                    
-                          </tr>`;
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden">
+                      ${p.productId}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-start">
+                      ${p.productShortName}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    ${p.brand.brandName}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.category.categoryName}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.unitPrice}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.unitsInStock}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.unitsOnOrder}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.reorderLevel}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${p.discontinued}
+                    </td>                    
+                  </tr>`;
   });
   productsTableBody.innerHTML += template;
 }
@@ -251,12 +326,11 @@ async function loadAndShowCustomers() {
   showCustomersInTable(customers);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
-  loadAndShowProducts();
-  loadAndShowUsers();
-  loadAndShowCustomers();
+  // loadAndShowHome();
+  // loadAndShowProducts();
+  // loadAndShowUsers();
+  // loadAndShowCustomers();
 });
 
 showMenuBtn.addEventListener("click", () => {
@@ -272,3 +346,122 @@ showMenuBtn.addEventListener("click", () => {
 
   logoutBtn.classList.toggle("hidden");
 });
+
+// showAddProductBtn
+// addProductModal
+// productNameProductInput
+// productBrandInput
+// productCategoryInput
+// unitPriceInput
+// unitsOnOrderInput
+// reorderLevelInput
+// productDescriptionInput
+// productPhotosInput
+// saveProductButton
+// cancelAddProductButton
+
+showAddProductBtn.addEventListener("click", () => {
+  showAddProductBtn.classList.add("hidden");
+  productsTableDiv.classList.add("hidden");
+
+  addProductModal.classList.remove("hidden");
+});
+
+cancelAddProductButton.addEventListener("click", function () {
+  showAddProductBtn.classList.remove("hidden");
+  productsTableDiv.classList.remove("hidden");
+
+  addProductModal.classList.add("hidden");
+});
+
+async function imagesToB64Url(photos) {
+  return new Promise((resolve, reject) => {
+    let photosB64 = [];
+    for (let i = 0; i < photos.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(photos[i]);
+      reader.onloadend = () => {
+        const obj = { photoBase64: reader.result };
+        photosB64.push(obj);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    }
+    resolve(photosB64);
+  });
+}
+
+// var productPhotos = [];
+
+saveProductButton.addEventListener("click", async function () {
+  const productName = productNameInput.value;
+  const productShortName = productShortNameInput.value;
+  const brandId = productBrandInput.value;
+  const categoryId = productCategoryInput.value;
+  const unitPrice = unitPriceInput.value;
+  const unitsOnOrder = unitsOnOrderInput.value;
+  const reorderLevel = reorderLevelInput.value;
+  const productDescription = productDescriptionInput.value;
+
+  const productPhotosB64 = await imagesToB64Url(productPhotosInput.files);
+  // const productPhotosAsB64 = await imagesToB64Url(productPhotosInput.files);
+
+  while (productPhotosB64 === []) {
+    console.log("waiting photos");
+    setTimeout(() => {}, 1000);
+  }
+
+  console.log(productPhotosB64);
+
+  let productPhotos = productPhotosB64;
+
+  const product = {
+    productName: productName,
+    productShortName: productShortName,
+    brandId: brandId,
+    categoryId: categoryId,
+    unitPrice: unitPrice,
+    unitsInStock: 0,
+    unitsOnOrder: unitsOnOrder,
+    reorderLevel: reorderLevel,
+    discontinued: false,
+    productDescription: productDescription,
+    productPhotos: productPhotos,
+  };
+
+  console.log(product);
+
+  setTimeout(() => {}, 1000);
+
+  alert("Lets see");
+
+  console.log(JSON.stringify(product));
+
+  return;
+
+  const productResponse = await addProduct(product);
+
+  if (!productResponse.ok) {
+    alert("Product an error occured");
+    return;
+  }
+
+  const addedProduct = await productResponse.json();
+  console.log(addedProduct);
+
+  alert("Product added successfully");
+
+  location.reload();
+});
+
+// function getFileList(files) {
+//   for (const f in files) {
+//     const file = files[f];
+//     productPhotos.push(file);
+//   }
+// }
+
+// productPhotosInput.addEventListener("change", function (e) {
+//   const file = productPhotosInput.files[0];
+// });

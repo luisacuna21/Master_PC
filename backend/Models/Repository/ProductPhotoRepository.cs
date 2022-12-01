@@ -16,6 +16,17 @@ public class ProductPhotoRepository : IProductPhotoRepository
         throw new NotImplementedException();
     }
 
+    public async Task<bool> AddMany(IEnumerable<ProductPhoto> productPhotos)
+    {
+        _context.ProductPhotos.AddRange(productPhotos);
+        await _context.SaveChangesAsync();
+        return true;
+        // foreach (var ps in productPhotos)
+        // {
+        //     await _context.ProductPhotos.AddRange(ps);
+        // }
+    }
+
     public Task<bool> Delete(int id)
     {
         throw new NotImplementedException();

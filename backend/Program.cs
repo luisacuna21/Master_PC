@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MasterPCContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("MasterPCCloud")));
 
+builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
@@ -18,6 +19,7 @@ builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductPhotoRepository, ProductPhotoRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IShipperRepository, ShipperRepository>();
 

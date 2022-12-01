@@ -139,7 +139,7 @@ function showProducts(products) {
   products.forEach((product) => {
     template += `<div class="container group relative rounded-lg shadow-sm shadow-gray-400 p-1">
         <div class="flex items-center sm:h-56 group-hover:opacity-75">
-        <img src="${product.firstPhoto.photoBase64}" alt="productPhoto.jpg"/>
+          <img src="${product.firstPhoto.photoBase64}" alt="productPhoto.jpg"/>
         </div>
         <div class="flex flex-wrap justify-between p-1">
           <div>

@@ -18,6 +18,13 @@ public class ProductRepository : IProductRepository
         return entity;
     }
 
+    // public async Task<bool> AddProductsPhotos(List<ProductPhoto> productPhotos)
+    // {
+    //     _context.ProductPhotos.AddRange(productPhotos);
+    //     await _context.SaveChangesAsync();
+    //     return true;
+    // }
+
     public async Task<bool> Update(Product entity)
     {
         _context.Entry(entity).State = EntityState.Modified;

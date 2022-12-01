@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
 using backend.Models.Repository;
+using backend.Models.ProductUtilities;
 
 namespace backend.Controllers
 {
@@ -15,10 +16,12 @@ namespace backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IProductPhotoRepository _productPhotoRepository;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IProductPhotoRepository productPhotoRepository)
         {
             _productRepository = productRepository;
+            _productPhotoRepository = productPhotoRepository;
         }
 
         // GET: api/Product
@@ -61,12 +64,41 @@ namespace backend.Controllers
         // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct(InsertProductRequest productRequest)
         {
-            if (product is null)
+            if (productRequest is null)
                 return BadRequest();
 
-            return await _productRepository.Add(product);
+            var product = new Product
+            {
+                ProductName = productRequest.ProductName,
+                BrandId = productRequest.BrandId,
+                CategoryId = productRequest.CategoryId,
+                UnitPrice = productRequest.UnitPrice,
+                UnitsInStock = productRequest.UnitsInStock,
+                UnitsOnOrder = productRequest.UnitsOnOrder,
+                ReorderLevel = productRequest.ReorderLevel,
+                Discontinued = productRequest.Discontinued,
+                ProductDescription = productRequest.ProductDescription,
+            };
+
+            var addedProduct = await _productRepository.Add(product);
+
+            if (addedProduct is null)
+                return Conflict("Product not inserted");
+
+            var productPhotos = productRequest.ProductPhotos.Select(p => new ProductPhoto
+            {
+                ProductId = addedProduct.ProductId,
+                PhotoBase64 = p.PhotoBase64
+            }).ToList();
+
+            var inserted = await _productPhotoRepository.AddMany(productPhotos);
+
+            if (!inserted)
+                Conflict("Product added but photos not");
+
+            return CreatedAtAction("GetProduct", new { id = addedProduct.ProductId }, addedProduct);
         }
 
         // DELETE: api/Product/5
