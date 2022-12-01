@@ -31,7 +31,7 @@ namespace backend.Models.Repository
                 ProductsCount = await _context.Products.CountAsync(),
                 CustomersCount = await _context.Customers.CountAsync(),
                 Income = income,
-                IncomeStringFormat = income.ToString("C3", CultureInfo.CreateSpecificCulture("en-US")),
+                IncomeStringFormat = income.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")),
                 ProductsPerOrderAverage =
                                             Math.Round(await _context.OrderDetails
                                             .GroupBy(od => od.OrderId)

@@ -327,10 +327,10 @@ async function loadAndShowCustomers() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // loadAndShowHome();
-  // loadAndShowProducts();
-  // loadAndShowUsers();
-  // loadAndShowCustomers();
+  loadAndShowHome();
+  loadAndShowProducts();
+  loadAndShowUsers();
+  loadAndShowCustomers();
 });
 
 showMenuBtn.addEventListener("click", () => {
@@ -393,8 +393,6 @@ async function getPhotosArray(photos) {
   return photosArray;
 }
 
-// var productPhotos = [];
-
 saveProductButton.addEventListener("click", async function () {
   const productName = productNameInput.value;
   const productShortName = productShortNameInput.value;
@@ -407,7 +405,7 @@ saveProductButton.addEventListener("click", async function () {
 
   const productPhotos = await getPhotosArray(productPhotosInput.files);
 
-  console.log(productPhotosB64);
+  console.log(productPhotos);
 
   const product = {
     productName: productName,
@@ -431,7 +429,7 @@ saveProductButton.addEventListener("click", async function () {
 
   console.log(JSON.stringify(product));
 
-  return;
+  // return;
 
   const productResponse = await addProduct(product);
 

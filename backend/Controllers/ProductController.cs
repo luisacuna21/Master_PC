@@ -72,6 +72,7 @@ namespace backend.Controllers
             var product = new Product
             {
                 ProductName = productRequest.ProductName,
+                ProductShortName = productRequest.ProductShortName,
                 BrandId = productRequest.BrandId,
                 CategoryId = productRequest.CategoryId,
                 UnitPrice = productRequest.UnitPrice,
