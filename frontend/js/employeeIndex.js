@@ -374,22 +374,23 @@ cancelAddProductButton.addEventListener("click", function () {
   addProductModal.classList.add("hidden");
 });
 
-async function imagesToB64Url(photos) {
-  return new Promise((resolve, reject) => {
-    let photosB64 = [];
-    for (let i = 0; i < photos.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(photos[i]);
-      reader.onloadend = () => {
-        const obj = { photoBase64: reader.result };
-        photosB64.push(obj);
-      };
-      reader.onerror = (error) => {
-        reject(error);
-      };
-    }
-    resolve(photosB64);
+async function encodeImageAsBase64URL(photo) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener("loadend", () => {
+      resolve(reader.result);
+    });
+    reader.readAsDataURL(photo);
   });
+}
+
+async function getPhotosArray(photos) {
+  let photosArray = [];
+  for (let i = 0; i < photos.length; i++) {
+    const photo = await encodeImageAsBase64URL(photos[i]);
+    photosArray.push({ photoBase64: photo });
+  }
+  return photosArray;
 }
 
 // var productPhotos = [];
@@ -404,17 +405,9 @@ saveProductButton.addEventListener("click", async function () {
   const reorderLevel = reorderLevelInput.value;
   const productDescription = productDescriptionInput.value;
 
-  const productPhotosB64 = await imagesToB64Url(productPhotosInput.files);
-  // const productPhotosAsB64 = await imagesToB64Url(productPhotosInput.files);
-
-  while (productPhotosB64 === []) {
-    console.log("waiting photos");
-    setTimeout(() => {}, 1000);
-  }
+  const productPhotos = await getPhotosArray(productPhotosInput.files);
 
   console.log(productPhotosB64);
-
-  let productPhotos = productPhotosB64;
 
   const product = {
     productName: productName,
